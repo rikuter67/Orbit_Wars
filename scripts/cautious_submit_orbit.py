@@ -18,31 +18,31 @@ MIN_PRODUCER_SAFETY_SCORE_FOR_EXPERIMENT = 1150.0
 CANDIDATES = {
     'producer_v2': (
         ROOT / 'submissions' / 'slawek_producer_v2_20260613.tar.gz',
-        'cautious latest2 producer_v2 20260613 one-shot',
+        'ProducerV2 baseline | original public code | latest2 safety | 20260613',
     ),
     'producer_v2_refresh': (
         ROOT / 'submissions' / 'slawek_producer_v2_20260613.tar.gz',
-        'cautious latest2 producer_v2 safety refresh 20260614',
+        'ProducerV2 baseline refresh | no code change | latest2 safety | 20260614',
     ),
     'reyhan20': (
         ROOT / 'submissions' / 'reyhan_selfcheck20_0_20260613.tar.gz',
-        'cautious latest2 reyhan 20勝0敗 selfcheck20-0 localKuni6-0 20260613',
+        'Reyhan public clone | 2P selfcheck 20勝0敗 | local Kuni 6-0 | 20260613',
     ),
     'hybrid_reyhan2p_producer4p': (
         ROOT / 'submissions' / 'hybrid_reyhan2p_producer4p_20260613.tar.gz',
-        'cautious latest2 hybrid reyhan2p 20勝0敗 selfcheck20-0 producer4p 20260613',
+        'Hybrid | Reyhan 2P 20勝0敗 + ProducerV2 4P | cautious FFA route | 20260613',
     ),
     'roman_smarter': (
         ROOT / 'submissions' / 'roman_smarter_20260613.tar.gz',
-        'cautious latest2 roman_smarter localKuni5-1 20260613',
+        'Roman smarter public clone | local Kuni 5-1 | exploratory | 20260613',
     ),
     'producer_ffa_guard': (
         ROOT / 'submissions' / 'producer_ffa_guard_20260614.tar.gz',
-        'cautious latest2 producer_ffa_guard local2p10-6vsProducer ffaTop2-16of16 20260614',
+        'ProducerV2 variant | FFA guard tuning | 2P 10-6 vs Producer | FFA top2 16/16 | 20260614',
     ),
     'h18_2ponly': (
         ROOT / 'submissions' / 'h18_roi13_beta18_2ponly_20260614.tar.gz',
-        'cautious latest2 h18_2ponly local2p17-11vsProducer poolBetter exact4p 20260614',
+        'ProducerV2 2P-only variant | H18 ROI1.3 beta1.8 | 17-11 vs Producer | exact 4P | 20260614',
     ),
 }
 

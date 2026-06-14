@@ -19,7 +19,12 @@ submission reset:
 
 - New row: `53658218`
 - Status in `logs/snapshot_20260614_124449_status.md`: `PENDING`
-- Latest two rows after this submit: Producer pending + Producer complete
+- Status in `logs/snapshot_20260614_125219_status.md`: `COMPLETE`, initial score `690.5`
+- Latest two rows after this submit: Producer refresh + Producer complete
+
+The `690.5` row should be treated as a newly completed/recovering Producer row,
+not as evidence for a new variant. Do not submit another candidate until this row
+is rechecked.
 
 ## Included Files
 
@@ -39,7 +44,20 @@ submission reset:
 
 ## Next Research Direction
 
-The next branch of work should target Producer-like opponents directly:
+The next branch of work should target Producer-like opponents directly.
+All new measures, candidate variants, and opponent-modeling experiments must be
+developed on a separate branch from `main`. Keep `main` as the checkpoint and
+evidence branch.
+
+Future Kaggle submission comments should be readable without opening the code.
+Use this format:
+
+`Base family | concrete change | local evidence | date`
+
+Examples:
+
+- `ProducerV2 baseline refresh | no code change | latest2 safety | 20260614`
+- `ProducerV2 2P-only variant | H18 ROI1.3 beta1.8 | 17-11 vs Producer | exact 4P | 20260614`
 
 - Model that many opponents are Producer clones or close variants.
 - Predict Producer's shortlists, safe-drain attack sizes, and regroup destinations.

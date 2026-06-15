@@ -26,9 +26,39 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
 1. 提出前に、何を変えたかと手元検証の根拠を残す。
 2. `py_compile` と可能なローカル評価を通す。
 3. latest2、pending、提出間隔を確認してから提出する。
-4. 提出後にKaggle ref、スコア、snapshot、次の判断を追記する。
+4. 次の提出前に、現在の最新提出のLive/Public scoreが収束したことを確認する。原則は直近100分以内に3点以上、45分以上の span、score spread `<=35.0`。未収束、未採点、pending がある場合は提出しない。
+5. 新規提出は原則 `scripts/cautious_submit_orbit.py` 経由にする。このスクリプトは3時間間隔、latest2 pending、score収束を提出前にブロックする。
+6. 提出後にKaggle ref、スコア、snapshot、次の判断を追記する。
 
 以下は時系列の生ログです。古い行には当時の判断がそのまま残っているため、現在の方針は [LAST_WEEK_STRATEGY.md](/mnt/c/Users/rikuter/kaggle/Orbit_Wars/LAST_WEEK_STRATEGY.md) を優先します。
+
+### 2026-06-16 06:20-06:44 JST (Producer mapgate refinement, no submit)
+
+- User rule update: before the next submission, confirm the current latest Live/Public score has converged. Operational gate is now written above: recent 100-minute window, at least 3 samples, at least 45-minute span, score spread `<=35.0`, no pending latest2 rows.
+- Latest live snapshot: `logs/snapshot_20260616_062042/status.md`.
+  - latest h19 ref `53714957`, score `1233.9`.
+  - recent convergence samples for h19: `04:55=1235.0`, `04:58=1235.0`, `06:20=1233.9`; span `1:24:44`, spread `1.1`.
+  - latest2 had no pending rows.
+- Baseline check on the hostile independent seed band:
+  - `logs/local_eval_20260616/h19_vs_producer_baseline_seed123_126.json`
+  - h19 vs Producer: `0-8`, diff_sum `-16.0`.
+  - This confirms `lowfast80_floor20` at `2-6` on the same seed band is a partial repair over h19, but still not submission-safe.
+- Feature analysis for `lowfast80_floor20`:
+  - `logs/local_eval_20260616/lowfast80_floor20_stage2_features.csv`
+  - `logs/local_eval_20260616/lowfast80_floor20_stage1_features.csv`
+  - Simple initial-map features did not cleanly separate Producer wins/losses. Several losses remain inside the low-fast gate, and several wins/ties sit outside or near the boundary.
+- Built four narrow/broad follow-up gates under `candidate_builds/h19_producer_mapgate_20260616/`:
+  - `lowfast80_floor20_margin18`
+  - `lowfast70_floor20_margin20`
+  - `lowfast80_floor20_margin22`
+  - `lowfast80_or_margin18`
+- Stage1 eval:
+  - `logs/local_eval_20260616/mapgate_refine_stage1_seed123_126.json`
+  - `lowfast80_floor20_margin18`: h19 `5-2` with 1 import error, Producer `2-6`.
+  - `lowfast70_floor20_margin20`: h19 `4-4`, Producer `0-8`.
+  - `lowfast80_floor20_margin22`: h19 `6-2`, Producer `2-6`.
+  - `lowfast80_or_margin18`: h19 `6-2`, Producer `2-6`.
+- Decision: do not submit. The refined initial-map gates preserve some h19 advantage but do not solve the Producer-clone matchup. Next axis should be action-based opponent modeling: infer whether the opponent's actual early fleets look Producer-like, then switch or adjust only when the opponent behavior confirms the hypothesis.
 
 ### 2026-06-14 13:58 (selection review)
 

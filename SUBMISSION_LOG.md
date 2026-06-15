@@ -116,6 +116,28 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - Baseline `logs/local_eval_20260616/h19_vs_oldv2_baseline_seed127_130.json` shows h19 is also `0-8` vs oldv2 on the same seeds, so oldv2 weakness is not introduced by softmod.
 - Decision: do not submit yet. This is safer than the global switch, but the verified gain is only neutral-vs-Producer plus no h19 collapse. It needs either stronger Producer-positive evidence on independent seeds or a lighter/stronger modifier before Live.
 
+### 2026-06-16 07:46-08:20 JST (softmod coefficient sweep, no submit)
+
+- Built three coefficient variants under `candidate_builds/h19_producer_softmod_20260616/`:
+  - `attack14_avoid12`: predicted target attack bonus `+1.4`, predicted hit source penalty `-1.2`.
+  - `attack08_avoid24`: attack bonus `+0.8`, source penalty `-2.4`.
+  - `attack16_avoid24`: attack bonus `+1.6`, source penalty `-2.4`.
+- Stage1 h19/Producer:
+  - `logs/local_eval_20260616/softmod_coeff_stage1_seed127_130.json`
+  - `attack14_avoid12`: h19 `2-2-4`, Producer `4-4`.
+  - `attack08_avoid24`: h19 `5-1-2`, Producer `4-4`.
+  - `attack16_avoid24`: h19 `5-1-2`, Producer `4-4`.
+  - Interpretation: stronger avoid penalty improves h19/self-like matchup; attack bonus size did not affect this seed band.
+- Public-pool check for the two avoid-strong variants:
+  - `logs/local_eval_20260616/softmod_coeff_public_seed127_130.json`
+  - `attack08_avoid24`: Kuni `5-3`, Carbon `5-3`, oldv2 `0-8`.
+  - `attack16_avoid24`: Kuni `5-3`, Carbon `5-3`, oldv2 `0-8`.
+  - Same as the earlier softmod; oldv2 remains a baseline seed-band weakness, not a new regression.
+- Independent h19/Producer check for the more conservative representative:
+  - `logs/local_eval_20260616/softmod_attack08_stage2_seed131_134.json`
+  - `attack08_avoid24`: h19 `5-3`, Producer `4-4`.
+- Decision: do not submit. `attack08_avoid24` is the best softmod so far because it repeatedly improves h19-like matchup while holding Producer neutral, but it still lacks a Producer-positive edge and remains computationally heavier than h19 due to enemy-perspective planning. Keep it as research candidate; next step should target either lighter detection or a stronger Producer-specific modifier that does not sacrifice h19.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

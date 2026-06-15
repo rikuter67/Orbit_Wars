@@ -152,6 +152,22 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - h19 vs Producer: `9-7`.
 - Decision: do not submit. Stronger avoid improves h19/self-like matchup, but Producer matchup is worse than h19 baseline on the same seeds (`8-8` vs `9-7`). This confirms the avoid softmod is not yet a Producer-killer; it is a self-like robustness idea only.
 
+### 2026-06-16 08:56-09:25 JST (initial lossgate parameter switch, no submit)
+
+- Extracted h19 vs Producer initial-map features:
+  - `logs/local_eval_20260616/h19_producer_127_134_features.csv`
+  - Loss rows had a mix of high-fast wide-margin cases and low-margin contested cases; no single clean separator.
+- Built three initial-feature gated parameter-switch variants under `candidate_builds/h19_producer_lossgate_20260616/`:
+  - `lossgate_roi15`: only lower 2P ROI threshold to `1.5` on risky initial maps.
+  - `lossgate_beta22`: only lower reinforcement beta to `2.2` on risky initial maps.
+  - `lossgate_s12t12`: switch risky initial maps toward Producer-like `H18 S12 T12 ROI1.5 beta2.2`.
+- Stage1 eval:
+  - `logs/local_eval_20260616/lossgate_stage1_seed127_134.json`
+  - `lossgate_roi15`: h19 `0-16`, Producer `0-16`.
+  - `lossgate_beta22`: h19 `0-16`, Producer `0-16`.
+  - `lossgate_s12t12`: h19 `0-16`, Producer `0-16`.
+- Decision: do not submit; discard this direction. The gated parameter switch completely collapses locally, far below h19 baseline (`9-7` vs Producer on the same seed band). This result also reinforces that global or semi-global config switching is too brittle compared with local scoring modifiers.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

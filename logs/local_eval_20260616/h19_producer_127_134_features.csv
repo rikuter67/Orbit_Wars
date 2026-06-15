@@ -1,0 +1,57 @@
+Loading environment chess failed: No module named 'kaggle_environments.envs.chess.chess'
+Loading environment llm_20_questions failed: No module named 'kaggle_environments.envs.llm_20_questions.llm_20_questions'
+Loading environment lux_ai_s2 failed: No module named 'kaggle_environments.envs.lux_ai_s2.lux_ai_s2'
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO: Successfully loaded OpenSpiel environments: 35.
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_amazons
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_ant_foraging_arena
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_backgammon
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_bargaining
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_python_ant_foraging
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_checkers
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_chess
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_clobber
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_coin_game
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_coin_game_arena
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_connect_four
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_dark_hex
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_dots_and_boxes
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_gin_rummy
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_go
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_goofspiel
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_havannah
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_hearts
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_hex
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_hive
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_lines_of_action
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_mancala
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_matching_pennies_3p
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_negotiation
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_oshi_zumo
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_othello
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_quoridor
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_repeated_game
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_tic_tac_toe
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_ultimate_tic_tac_toe
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_snake
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_y
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_universal_poker
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_repeated_poker
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO:    open_spiel_python_repeated_pokerkit
+[kaggle_environments.envs.open_spiel_env.open_spiel_env] INFO: OpenSpiel games skipped: 0.
+candidate,opponent,seed,player,outcome,diff,best_fast_value,best_contest_value,contest_count,my_fast_count,enemy_fast_count,min_abs_margin,avg_abs_margin_top5
+h19,producer,127,0,W,2.0,38.44722457733622,0.0,0,1,1,0.0,25.182656641443117
+h19,producer,127,1,W,2.0,35.886294361119894,0.0,0,1,1,0.0,13.31852670142636
+h19,producer,128,0,W,2.0,78.02258872223979,0.0,0,5,5,0.0,22.440320500031238
+h19,producer,128,1,W,2.0,39.636294361119894,0.0,0,1,1,0.0,32.78550622894026
+h19,producer,129,0,L,-2.0,94.7188758248682,0.0,0,2,2,0.0,30.410597970704792
+h19,producer,129,1,L,-2.0,56.69722457733622,0.0,0,5,5,0.0,7.796481712468011
+h19,producer,130,0,L,-2.0,76.02258872223979,0.0,0,2,2,0.0,27.730904483488462
+h19,producer,130,1,L,-2.0,94.4688758248682,0.0,0,3,3,0.0,23.920531842454835
+h19,producer,131,0,W,2.0,37.636294361119894,0.0,0,3,3,0.0,24.651058153192434
+h19,producer,131,1,W,2.0,96.9688758248682,0.0,0,4,4,0.0,21.175839621337783
+h19,producer,132,0,W,2.0,74.02258872223979,0.0,0,2,2,0.0,16.815295832228202
+h19,producer,132,1,W,2.0,34.886294361119894,0.0,0,2,2,0.0,23.331757106231134
+h19,producer,133,0,L,-2.0,96.9688758248682,0.0,0,1,1,0.0,7.846937933310852
+h19,producer,133,1,W,2.0,69.02258872223979,0.0,0,3,3,0.0,31.204202436395185
+h19,producer,134,0,L,-2.0,95.9688758248682,0.0,0,4,4,0.0,28.491522295596212
+h19,producer,134,1,L,-2.0,56.69722457733622,0.0,0,2,2,0.0,20.35305606594579

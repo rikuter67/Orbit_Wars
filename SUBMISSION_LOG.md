@@ -178,6 +178,28 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `shoroogh`: vs h19 `2-14`, vs Producer `2-14`.
 - Decision: do not build a conditional public-code selector from these candidates. None complements h19 on the current hostile band; all are materially weaker than h19 and Producer.
 
+### 2026-06-16 09:56-10:35 JST (replay trace and early-conserve test, no submit)
+
+- Added `scripts/trace_orbit_game.py` to trace local games into turn-level CSV:
+  - totals, planet ships, fleet ships, production, planet counts, and ownership flips.
+- Generated trace:
+  - `logs/local_eval_20260616/h19_producer_trace_seed127_134.csv`
+  - h19 vs Producer with `randomSeed` to match `scripts/orbit_batch_eval.py`.
+- Trace summary:
+  - Losing games usually go total-ship negative around turns `22-30`.
+  - Production/planet deficits become decisive later, especially after turn `100`.
+  - This suggested trying a small early conservatism patch rather than global config switching.
+- Built three early-conserve variants under `candidate_builds/h19_early_conserve_20260616/`:
+  - `early_w4`: until turn 35, `max_waves_per_turn=4`.
+  - `early_w5`: until turn 35, `max_waves_per_turn=5`.
+  - `early_min8`: until turn 35, `min_ships_to_launch=8`.
+- Stage1 eval:
+  - `logs/local_eval_20260616/early_conserve_stage1_seed127_134.json`
+  - `early_w4`: h19 `6-6-4`, Producer `9-7`.
+  - `early_w5`: h19 `6-6-4`, Producer `9-7`.
+  - `early_min8`: h19 `5-7-4`, Producer `9-7`.
+- Decision: do not submit and do not run public-pool follow-up. Early conservatism matches h19's Producer score but worsens h19/self-like matchup, so it has no verified upside over h19.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

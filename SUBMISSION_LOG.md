@@ -60,6 +60,39 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `lowfast80_or_margin18`: h19 `6-2`, Producer `2-6`.
 - Decision: do not submit. The refined initial-map gates preserve some h19 advantage but do not solve the Producer-clone matchup. Next axis should be action-based opponent modeling: infer whether the opponent's actual early fleets look Producer-like, then switch or adjust only when the opponent behavior confirms the hypothesis.
 
+### 2026-06-16 06:45-07:20 JST (action-based Producer detection, no submit)
+
+- New branch in clean Git checkout: `exp/h19-producer-actiondetect-20260616`.
+- Built `candidate_builds/h19_producer_actiondetect_20260616/producer_like_switch`.
+  - Base behavior: h19 settings in 2P, exact Producer settings in 4P.
+  - Additional detector: from each observation, predict the opponent's next action by running the Producer planner from the enemy perspective, store predicted `(from_planet_id, angle, ships)`, and on the next turn compare against real enemy fleets.
+  - Switch 2P config to Producer if enough predicted enemy launches match real enemy fleets.
+- Syntax/smoke:
+  - `py_compile` passed.
+  - Single seed 123 game vs Producer completed without runtime error.
+- Stage1 hostile band:
+  - `logs/local_eval_20260616/actiondetect_stage1_seed123_126.json`
+  - vs h19: `8-0`, diff_sum `16.0`.
+  - vs Producer: `3-5`, diff_sum `-4.0`.
+  - Interpretation: better than `lowfast80_floor20` on this band, but still not enough to submit.
+- Stage2 independent public-pool band:
+  - `logs/local_eval_20260616/actiondetect_stage2_seed127_130.json`
+  - vs Producer: `4-4`.
+  - vs h19: `2-6`.
+  - vs Kuni: `6-2`; vs Carbon: `6-2`; vs oldv2: `4-4`.
+  - Interpretation: action detection improves Producer matchup, but damages h19/self-like matchup.
+- Built stricter variants:
+  - `producer_like_switch_strict3`: require at least 3 predicted launch matches.
+  - `producer_like_switch_strict4`: require at least 4 predicted launch matches.
+- Strict eval:
+  - `logs/local_eval_20260616/actiondetect_strict_stage1_seed127_130.json`
+  - `strict3`: h19 `2-6`, Producer `5-3`.
+  - `strict4`: h19 `2-6`, Producer `5-3`.
+- h19 self baseline on the same seed band:
+  - `logs/local_eval_20260616/h19_self_baseline_seed127_130.json`
+  - h19 vs h19: `2-2-4`, diff_sum `0.0`.
+- Decision: do not submit any action-detect switch variant. The detector can identify Producer enough to improve Producer matchup, but switching the whole 2P config creates false-positive or behavior drift against h19-like opponents. Next safer direction: keep h19 config always, and use Producer-likeness only as a small scoring/avoidance modifier rather than a global config switch.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

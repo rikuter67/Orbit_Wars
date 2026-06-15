@@ -168,6 +168,16 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `lossgate_s12t12`: h19 `0-16`, Producer `0-16`.
 - Decision: do not submit; discard this direction. The gated parameter switch completely collapses locally, far below h19 baseline (`9-7` vs Producer on the same seed band). This result also reinforces that global or semi-global config switching is too brittle compared with local scoring modifiers.
 
+### 2026-06-16 09:26-09:55 JST (public complement check, no submit)
+
+- Tested whether prior public candidates can complement h19 on the h19-vs-Producer seed band `127-134`.
+- Eval:
+  - `logs/local_eval_20260616/public_complement_seed127_134.json`
+  - `roman_better`: vs h19 `5-11`, vs Producer `3-13`.
+  - `caoyu_v2_gru`: vs h19 `5-11`, vs Producer `3-13`.
+  - `shoroogh`: vs h19 `2-14`, vs Producer `2-14`.
+- Decision: do not build a conditional public-code selector from these candidates. None complements h19 on the current hostile band; all are materially weaker than h19 and Producer.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

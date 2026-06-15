@@ -93,6 +93,29 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - h19 vs h19: `2-2-4`, diff_sum `0.0`.
 - Decision: do not submit any action-detect switch variant. The detector can identify Producer enough to improve Producer matchup, but switching the whole 2P config creates false-positive or behavior drift against h19-like opponents. Next safer direction: keep h19 config always, and use Producer-likeness only as a small scoring/avoidance modifier rather than a global config switch.
 
+### 2026-06-16 07:21-07:45 JST (soft Producer-target modifier, no submit)
+
+- New branch in clean Git checkout: `exp/h19-producer-softmod-20260616`.
+- Built `candidate_builds/h19_producer_softmod_20260616/predicted_target_bonus`.
+  - Keeps h19 config in 2P and Producer config in 4P.
+  - Retains action-based Producer-likeness detector, but no global config switch.
+  - Once Producer-like behavior is confirmed, uses predicted enemy Producer targets as a small planner score modifier:
+    - `+0.8` for attacking a predicted enemy target.
+    - `-1.2` for launching from a planet predicted to be hit soon.
+- Syntax/smoke:
+  - `py_compile` passed.
+  - Single seed 127 game vs Producer completed without runtime error and won from player 0.
+- Stage1 h19/Producer:
+  - `logs/local_eval_20260616/softmod_stage1_seed127_130.json`
+  - vs h19: `2-2-4`, diff_sum `0.0`.
+  - vs Producer: `4-4`, diff_sum `0.0`.
+  - Compared with action-detect switch, this fixes the h19 self-like collapse (`2-6` -> `2-2-4`) while keeping Producer neutral.
+- Public-pool check:
+  - `logs/local_eval_20260616/softmod_public_stage1_seed127_130.json`
+  - vs Kuni: `5-3`; vs Carbon: `5-3`; vs oldv2: `0-8`.
+  - Baseline `logs/local_eval_20260616/h19_vs_oldv2_baseline_seed127_130.json` shows h19 is also `0-8` vs oldv2 on the same seeds, so oldv2 weakness is not introduced by softmod.
+- Decision: do not submit yet. This is safer than the global switch, but the verified gain is only neutral-vs-Producer plus no h19 collapse. It needs either stronger Producer-positive evidence on independent seeds or a lighter/stronger modifier before Live.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

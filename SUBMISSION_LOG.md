@@ -26,7 +26,7 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
 1. 提出前に、何を変えたかと手元検証の根拠を残す。
 2. `py_compile` と可能なローカル評価を通す。
 3. latest2、pending、提出間隔を確認してから提出する。
-4. 次の提出前に、現在の最新提出のLive/Public scoreが収束したことを確認する。原則は直近100分以内に3点以上、45分以上の span、score spread `<=35.0`。未収束、未採点、pending がある場合は提出しない。
+4. 次の提出前に、現在の最新提出のLive/Public scoreが収束したことを確認し、snapshotを残す。原則は直近100分以内に3点以上、45分以上の span、score spread `<=35.0`。未収束、未採点、pending がある場合は提出しない。
 5. 新規提出は原則 `scripts/cautious_submit_orbit.py` 経由にする。このスクリプトは3時間間隔、latest2 pending、score収束を提出前にブロックする。
 6. 提出後にKaggle ref、スコア、snapshot、次の判断を追記する。
 
@@ -199,6 +199,28 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `early_w5`: h19 `6-6-4`, Producer `9-7`.
   - `early_min8`: h19 `5-7-4`, Producer `9-7`.
 - Decision: do not submit and do not run public-pool follow-up. Early conservatism matches h19's Producer score but worsens h19/self-like matchup, so it has no verified upside over h19.
+
+### 2026-06-16 10:36-10:55 JST (action trace and early-aggressive test, no submit)
+
+- Added `scripts/trace_orbit_actions.py` to record each agent's returned moves:
+  - source planet, angle, ships, and an approximate target planet inferred from the launch ray.
+- Generated action trace for h19 vs Producer loss seeds:
+  - `logs/local_eval_20260616/h19_producer_actions_lossseeds.csv`
+  - seeds `129,130,133,134`, both player orders.
+- Action trace summary through turn `30`:
+  - h19 launched `1130` ships across `56` moves.
+  - Producer launched `1226` ships across `58` moves.
+  - Producer was generally more aggressive early, so the prior early-conserve idea was not supported by action data.
+- Built three early-aggressive variants under `candidate_builds/h19_early_aggressive_20260616/`:
+  - `early_w8`: until turn 35, `max_waves_per_turn=8`.
+  - `early_min2`: until turn 35, `min_ships_to_launch=2.0`.
+  - `early_w8_min2`: both changes.
+- Stage1 eval:
+  - `logs/local_eval_20260616/early_aggressive_stage1_seed127_134.json`
+  - `early_w8`: h19 `6-6-4`, Producer `9-7`.
+  - `early_min2`: h19 `6-6-4`, Producer `9-7`.
+  - `early_w8_min2`: h19 `6-6-4`, Producer `9-7`.
+- Decision: do not submit. All early-aggressive variants exactly match h19's Producer score on this seed band and worsen self-like matchup compared with h19. No Live submission is allowed from this result, and the next submission still requires fresh latest-score convergence confirmation.
 
 ### 2026-06-14 13:58 (selection review)
 

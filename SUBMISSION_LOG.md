@@ -138,6 +138,20 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `attack08_avoid24`: h19 `5-3`, Producer `4-4`.
 - Decision: do not submit. `attack08_avoid24` is the best softmod so far because it repeatedly improves h19-like matchup while holding Producer neutral, but it still lacks a Producer-positive edge and remains computationally heavier than h19 due to enemy-perspective planning. Keep it as research candidate; next step should target either lighter detection or a stronger Producer-specific modifier that does not sacrifice h19.
 
+### 2026-06-16 08:21-08:55 JST (deeper avoid penalty sweep, no submit)
+
+- Built two deeper avoid variants from `attack08_avoid24`:
+  - `attack08_avoid36`: attack bonus `+0.8`, predicted-hit source penalty `-3.6`.
+  - `attack08_avoid48`: attack bonus `+0.8`, predicted-hit source penalty `-4.8`.
+- Stage eval:
+  - `logs/local_eval_20260616/softmod_avoid_deeper_seed127_134.json`
+  - `attack08_avoid36`: h19 `10-4-2`, Producer `8-8`.
+  - `attack08_avoid48`: h19 `10-4-2`, Producer `8-8`.
+- Baseline on the same seed band:
+  - `logs/local_eval_20260616/h19_vs_producer_baseline_seed127_134.json`
+  - h19 vs Producer: `9-7`.
+- Decision: do not submit. Stronger avoid improves h19/self-like matchup, but Producer matchup is worse than h19 baseline on the same seeds (`8-8` vs `9-7`). This confirms the avoid softmod is not yet a Producer-killer; it is a self-like robustness idea only.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

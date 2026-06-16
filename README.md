@@ -30,6 +30,9 @@ Orbit_Wars_git/
   RESEARCH_NOTES.md
   CHECKPOINT_PRODUCER_1211_3.md
   MANUAL_RESTORE_STEPS.md
+  archive/
+    decisions/
+      restore_decision_20260616.md   ← 過去の復元判断メモ（必要時）
 
   scripts/                  ← 再現・検証・提出・監査の実行スクリプト
   candidate_builds/         ← 候補版のソース
@@ -70,6 +73,11 @@ Orbit_Wars_git/
 
 - `submissions/<name>.tar.gz` は Kaggle 提出時点の再現物。
 - 参照用として保存し、再現は `candidate_builds` 側を正として行います。
+
+### archive/
+
+- `decisions/restore_decision_20260616.md` は 6/16 の復元判断を記録した履歴ノート。
+- 日々の再現・提出フローには不要なため、提出可否の判断は `LOG.md` と `SUBMISSION_LOG.md` で完結させます。
 
 ---
 

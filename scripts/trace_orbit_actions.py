@@ -36,6 +36,10 @@ def obs_get(obs, key, default=None):
         return getattr(obs, key, default)
 
 
+def planet_by_id(obs) -> dict[int, list]:
+    return {int(p[0]): p for p in obs_get(obs, "planets", [])}
+
+
 def nearest_target_id(obs, from_pid: int, angle: float, ships: float) -> int:
     planets = obs_get(obs, "planets", [])
     source = None
@@ -69,11 +73,15 @@ def make_recorder(agent, agent_label, rows, seed, swapped, slot):
     def wrapped(obs):
         step = int(obs_get(obs, "step", 0) or 0)
         player = int(obs_get(obs, "player", slot) or slot)
+        planets_by_id = planet_by_id(obs)
         moves = agent(obs)
         for idx, move in enumerate(moves or []):
             if len(move) < 3:
                 continue
             from_pid, angle, ships = move[:3]
+            source = planets_by_id.get(int(from_pid))
+            target_pid = nearest_target_id(obs, int(from_pid), float(angle), float(ships))
+            target = planets_by_id.get(int(target_pid))
             rows.append({
                 "seed": seed,
                 "swapped": swapped,
@@ -85,7 +93,13 @@ def make_recorder(agent, agent_label, rows, seed, swapped, slot):
                 "from_pid": int(from_pid),
                 "angle": float(angle),
                 "ships": float(ships),
-                "approx_target_pid": nearest_target_id(obs, int(from_pid), float(angle), float(ships)),
+                "source_owner": int(source[1]) if source else -99,
+                "source_ships": float(source[5]) if source else -1.0,
+                "source_radius": float(source[4]) if source else -1.0,
+                "approx_target_pid": target_pid,
+                "target_owner": int(target[1]) if target else -99,
+                "target_ships": float(target[5]) if target else -1.0,
+                "target_radius": float(target[4]) if target else -1.0,
             })
         return moves
     return wrapped
@@ -125,7 +139,9 @@ def main() -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "seed", "swapped", "slot", "player", "agent", "step", "move_idx",
-        "from_pid", "angle", "ships", "approx_target_pid",
+        "from_pid", "angle", "ships", "source_owner", "source_ships",
+        "source_radius", "approx_target_pid", "target_owner", "target_ships",
+        "target_radius",
     ]
     with out.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)

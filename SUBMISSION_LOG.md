@@ -222,6 +222,42 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `early_w8_min2`: h19 `6-6-4`, Producer `9-7`.
 - Decision: do not submit. All early-aggressive variants exactly match h19's Producer score on this seed band and worsen self-like matchup compared with h19. No Live submission is allowed from this result, and the next submission still requires fresh latest-score convergence confirmation.
 
+### 2026-06-16 10:56-11:55 JST (fast Producer-target and oldv2/multisize probe, no submit)
+
+- Built three faster predicted-target softmod variants under `candidate_builds/h19_producer_fasttarget_20260616/`:
+  - `fast1`: activate target softmod after 1 predicted Producer launch match.
+  - `fast2`: activate after 2 predicted Producer launch matches.
+  - `always_light`: always assume Producer target model, with lighter `+0.4/-1.2` score modifiers.
+- Stage1 eval:
+  - `logs/local_eval_20260616/fasttarget_stage1_seed127_130.json`
+  - `fast1`: h19 `5-1-2`, Producer `4-4`.
+  - `fast2`: h19 `5-1-2`, Producer `4-4`.
+  - `always_light`: h19 `2-2-4`, Producer `4-4`.
+  - Decision: no submit. `fast1/fast2` improve self-like matchup but do not improve Producer beyond existing softmod behavior.
+- Probed oldv2 because h19 had a known local `0-8` weakness on seeds `127-130`:
+  - `logs/local_eval_20260616/oldv2_probe_seed127_130.json`
+  - oldv2 vs h19: `8-0`.
+  - oldv2 vs Producer: `2-6`.
+  - Interpretation: oldv2 is a real h19 counter on this band, while plain Producer beats oldv2.
+- Built `candidate_builds/h19_oldv2_multisize_20260616/h19params`:
+  - oldv2-style multi-size candidate evaluation `size_multipliers=(0.5,0.75,1.0)`.
+  - h19-like 2P params: `H19 S14 T14 W6 ROI1.6`.
+- Stage1 eval:
+  - `logs/local_eval_20260616/h19params_multisize_seed127_130.json`
+  - vs h19 `5-3`, vs Producer `6-2`, vs oldv2 `2-6`.
+- Stage2 independent/public-pool eval:
+  - `logs/local_eval_20260616/h19params_multisize_stage2_seed131_134.json`
+  - vs h19 `2-6`, vs Producer `4-4`, vs oldv2 `7-1`, vs Kuni `6-2`, vs Carbon `6-2`.
+  - Combined `127-134`: vs Producer `10-6`, vs oldv2 `9-7`, but vs h19 `7-9`.
+- Extended `scripts/trace_orbit_actions.py` with source/target owner, ships, and radius columns, then generated:
+  - `logs/local_eval_20260616/h19_oldv2_actions_features_seed127_130.csv`
+  - `logs/local_eval_20260616/h19_producer_actions_features_seed127_130.csv`
+  - `logs/local_eval_20260616/h19_h19_actions_features_seed127_130.csv`
+- Detection check:
+  - Early `ships/source_ships` ratios are mostly `1.0` for oldv2, Producer, and h19.
+  - No simple early action feature cleanly separates oldv2 from h19/Producer on this seed band.
+- Decision: do not submit `h19params_multisize` yet. It is the first candidate with real combined improvement vs Producer and oldv2, but the `7-9` result vs h19-like opponents is too risky for Live while Producer/h19 clones are likely common. Keep it as a research branch; next best direction is conditional selection, but only if a reliable behavior detector is found.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

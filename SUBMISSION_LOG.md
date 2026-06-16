@@ -297,6 +297,25 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `m05_075_100`: h19 `4-4`, Producer `6-2`, oldv2 `3-5`.
 - Decision: do not submit. The integrated multisize idea can clearly target Producer (`m075_100`, `m05_075_100`) or partially repair oldv2 (`m05_100`), but no variant improves all critical matchups at once, and all are slower than h19. Keep `m075_100` as a Producer-specific research lever and `m05_100` as an oldv2-specific lever; neither is Live-safe without reliable opponent detection.
 
+### 2026-06-16 13:06-13:45 JST (targeted 0.75 multisize, no submit)
+
+- Built three targeted variants under `candidate_builds/h19_targeted_multisize_20260616/` from `m075_100`:
+  - `enemy075`: 0.75-size candidates only for enemy-owned targets.
+  - `nonmine075`: 0.75-size candidates only for non-owned targets.
+  - `early075`: 0.75-size candidates only through turn 80.
+- Syntax/smoke:
+  - `py_compile` passed.
+  - Single game vs Producer seed `127` completed without runtime error.
+- Stage1 eval:
+  - `logs/local_eval_20260616/targeted_multisize_stage1_seed127_130.json`
+  - `enemy075`: h19 `5-3`, Producer `4-4`, oldv2 `2-6`.
+  - `nonmine075`: h19 `4-4`, Producer `6-2`, oldv2 `4-4`.
+  - `early075`: h19 `3-5`, Producer `7-1`, oldv2 `3-5`.
+- Stage2 for the best balanced candidate:
+  - `logs/local_eval_20260616/nonmine075_stage2_seed131_134.json`
+  - `nonmine075`: h19 `2-6`, Producer `6-2`, oldv2 `6-2`, Kuni `8-0`, Carbon `8-0`.
+- Decision: do not submit. `nonmine075` is strong against Producer/oldv2/Kuni/Carbon but fails the h19-like matchup on independent seeds. Since h19/Producer clones are expected to be common, this remains too risky for Live without reliable opponent detection.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

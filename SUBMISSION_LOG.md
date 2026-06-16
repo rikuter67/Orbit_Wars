@@ -335,6 +335,36 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `gatefast4`: h19 `4-8-4`, Producer `9-7`, oldv2 `6-10`.
 - Decision: do not submit. Gating can retain some Producer gain, but h19-like matchup remains worse than h19 baseline and the runtime cost is high. Initial-map gating is not sufficient for this family.
 
+### 2026-06-16 14:36-15:35 JST (h19 2P + h20-style 4P mix, no submit yet)
+
+- Built `candidate_builds/h19_h20_4p_20260616/h19_2p_h20_4p`:
+  - 2P remains h19-style.
+  - 4P uses the earlier h20-style safer/upside config: `ROI1.8`, `beta3.0`, `horizon=13`, `S6`, `D2`, regroup enabled.
+- Syntax/smoke:
+  - `py_compile` passed.
+  - Single 2P smoke vs Producer seed `69` lost.
+  - Single 4P smoke seed `69` completed without runtime error.
+- FFA eval against Producer/Kuni/Carbon pool:
+  - `logs/local_eval_20260616/h19_h20_4p_ffa_seed69_72.json`
+  - `h19_h20_4p`: top2 `16/16`, wins `10/16`.
+  - `h19`: top2 `16/16`, wins `6/16`.
+  - `logs/local_eval_20260616/h19_h20_4p_ffa_seed73_76.json`
+  - `h19_h20_4p`: top2 `16/16`, wins `7/16`.
+  - `h19`: top2 `16/16`, wins `7/16`.
+  - Combined 4P: `h19_h20_4p` wins `17/32`, h19 wins `13/32`, both top2 `32/32`.
+- 2P regression:
+  - `logs/local_eval_20260616/h19_h20_4p_2p_regression_seed127_130.json`
+  - vs h19: `2-2-4`.
+  - vs Producer: `4-4`.
+- Decision: do not submit immediately. This is the first recent candidate with a modest verified 4P win-rate improvement while preserving 4P top2, but the 2P signal is only neutral and the Live score must be rechecked first. Any next submission must be preceded by a fresh latest2 convergence snapshot: both latest rows complete, no pending rows, at least 3 recent score samples over at least 45 minutes, and score spread no more than `35.0`.
+- 2026-06-16 10:28 JST live snapshot saved at `logs/snapshot_20260616_102806/status.md`:
+  - latest1 h19 ref `53714957` complete, score `1227.5`.
+  - latest2 Producer ref `53658218` complete, score `1187.7`.
+  - no pending latest2 rows.
+  - h19 convergence samples: `04:55=1235.0`, `06:20=1233.9`, `10:28=1227.5`; span `5:32`, spread `7.5`.
+  - Producer convergence samples: `04:55=1200.1`, `06:20=1193.3`, `10:28=1187.7`; span `5:32`, spread `12.4`.
+  - Live state is converged enough for a future submit gate, but no submit was made from this check.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

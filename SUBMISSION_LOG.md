@@ -463,6 +463,23 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - For submit decisions, prefer string-path smoke or archived extraction checks over function-loaded batch whenever a candidate bundles multiple agents or old `orbit_lite` copies.
 - Decision: do not submit or deepen this selector. The idea is conceptually useful, but the actual submission-like smoke fails immediately.
 
+### 2026-06-16 19:21-19:40 JST (path-based evaluator added, no submit)
+
+- Added `scripts/orbit_path_eval.py`:
+  - Same JSON output shape as `scripts/orbit_batch_eval.py`.
+  - Passes agent file paths directly to `env.run([...])` instead of loading Python `agent` functions in-process.
+  - This is closer to Kaggle/local submission execution and avoids misleading results from `orbit_lite`/module-state collisions in old multi-file agents.
+- Syntax:
+  - `py_compile` passed.
+- Verification:
+  - `logs/local_eval_20260616/path_eval_exp48_seed127.json`
+  - path-mode `exp48_restore` vs h19 seed `127`: `2-0`.
+  - path-mode `exp48_restore` vs Producer seed `127`: `0-2`.
+  - `logs/local_eval_20260616/path_eval_selector_seed127.json`
+  - path-mode `prod3_h19fallback` selector vs h19 seed `127`: `0-2`.
+  - path-mode selector vs Producer seed `127`: `0-2`.
+- Decision: no submit. Keep using `orbit_path_eval.py` for any future candidate that bundles old public agents, multiple `orbit_lite` copies, or wrapper selectors. Function-loaded `orbit_batch_eval.py` is still useful for homogeneous h19-family variants but is not authoritative for old multi-file agents.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

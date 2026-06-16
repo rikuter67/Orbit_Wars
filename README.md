@@ -60,15 +60,72 @@ tar -czf /tmp/highfast85_test.tar.gz main.py
 
 ### 2-4. ローカル単体対戦（再現最重要）
 
+ここが通らない候補は、提出前で止めます。まずローカルで「再現性」を担保し、
+それが成立してから live へ進みます。
+
+- `py_compile`：構文や import エラーを最初に潰す。
+- 2P単体対戦：`Producer` に対する優位性（勝敗の傾向）が安定しているかを見る。
+- FFA補完対戦：`4P`で top2 が崩れやすい相手（Kuni / carbon / oldv2）へ影響がないか見る。
+
+意図:
+
+- 2Pと4Pを同じ評価フローで見る。
+- seed を固定して再現可能性を担保する。
+- 条件を満たさなければ提出ルートへ進まない。
+
+期待される出力（重要）:
+
+- `logs/local_eval_20260616/example_check.json` が生成される。
+- `summary` 配下の `wins` / `losses` / `draws`（または同等項目）で、期待した方向性が見える。
+
+異常時:
+
+- JSONが生成されない場合は、`kaggle-environments` のimport、`--candidate` のパス、seed指定を再確認。
+- 予想外に悪化していたら、その候補はここで止めて提出に進まない。
+
 ```bash
+# まず構文エラーと import 破損を除外
+python3 -m py_compile candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
+
+# 2P再現（Producer との直接比較）
 python3 scripts/orbit_path_eval_isolated.py \
-  --candidate candidate=./submissions/highfast85_producer_gate_20260616.tar.gz \
+  --candidate highfast85=./submissions/highfast85_producer_gate_20260616.tar.gz \
   --opponent slawek=./submissions/slawek_producer_v2_20260613.tar.gz \
   --seeds 127,128,129,130 \
   --out logs/local_eval_20260616/example_check.json
+
+# 4P補完チェック（top2崩れがないか）
+python3 scripts/orbit_path_eval_isolated.py \
+  --candidate highfast85=./submissions/highfast85_producer_gate_20260616.tar.gz \
+  --ffa-opponents submissions/slawek_producer_v2_20260613.tar.gz,submissions/kuni_lb1240_clean.tar.gz,submissions/carbon_top1_fork_output.tar.gz \
+  --seeds 127,128,129,130 \
+  --out logs/local_eval_20260616/example_check_ffa.json
 ```
 
 ### 2-5. 提出（候補を採用した場合）
+
+このコマンドは、採用判断が最終確定した時だけ実行します。
+ここは「最終提出手段」なので、`2-6` の最低チェックを先に満たすことが前提です。
+
+目的:
+
+- ローカル再現と検証済み候補を、Kaggle公式経路で提出する。
+- コメントに再現キーを残して、後で提出履歴から判別可能にする。
+
+補足:
+
+- 再現した seed 条件を壊さないため、コマンドは毎回同じ名前でログを保存しておく。
+- 失敗した場合は `scripts/cautious_submit_orbit.py` の条件（pending、3時間、latest2）を確認してから再試行する。
+
+期待される出力:
+
+- 提出ID（ref）と最新 status が CLI に返る。
+- コメント文字列が `-m` で完全一致で残る。
+
+異常時:
+
+- pending が直前で重なっていたり、認証情報不足なら提出は失敗。
+- その場合は `2-6` の提出前チェックを再チェックして、`scripts/cautious_submit_orbit.py` を推奨。
 
 ```bash
 kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20260616.tar.gz \
@@ -77,15 +134,35 @@ kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20
 
 ### 2-6. 提出前の最低チェック
 
+以下は提出可否の最終ゲートです。どれか1つでも満たさなければ提出前の状態を凍結せず、ここで止めます。
+
+#### 2-6-a. コード整合チェック
+
 - `py_compile` 済み
   - `python3 -m py_compile <candidate>/main.py`
+
+#### 2-6-b. 一貫性チェック
+
 - 同一候補を2バッチ以上で同傾向確認
   - 最低でも `--seeds 127-130` と別帯域
+
+#### 2-6-c. 収束チェック（live）
+
 - live スコア収束
   - 直近 100分以上
   - 3点以上のサンプル
   - `spread <= 35`
+
+#### 2-6-d. 進行保護チェック
+
 - latest2 が `pending` でないこと
+
+それぞれの理由:
+
+- `py_compile`: 構文エラーで提出しても提出ログだけが増える事故を防ぐ。
+- 2バッチ確認: seed 依存の偏りを避ける。
+- live収束: 時間で揺れる点を防ぐ。
+- pending確認: 替わられた提出状態の上書き競合を避ける。
 
 ---
 

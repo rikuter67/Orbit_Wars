@@ -258,6 +258,27 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - No simple early action feature cleanly separates oldv2 from h19/Producer on this seed band.
 - Decision: do not submit `h19params_multisize` yet. It is the first candidate with real combined improvement vs Producer and oldv2, but the `7-9` result vs h19-like opponents is too risky for Live while Producer/h19 clones are likely common. Keep it as a research branch; next best direction is conditional selection, but only if a reliable behavior detector is found.
 
+### 2026-06-16 11:56-12:25 JST (initial-map multisize selector, no submit)
+
+- Generated initial-map feature CSVs:
+  - `logs/local_eval_20260616/h19params_multisize_features_seed127_134_clean.csv`
+  - `logs/local_eval_20260616/h19_producer_baseline_features_seed127_134_clean.csv`
+- Threshold search:
+  - Simple initial-map features were weak.
+  - `avg_abs_margin_top5 <= 15.0` was the most conservative candidate: it avoided known h19-loss rows in the retrospective table, but triggered only on a small subset.
+- Built `candidate_builds/h19_multisize_mapselect_20260616/avg_margin15`:
+  - Wrapper loads h19 and `h19params_multisize`.
+  - On turn 0, if 2P and `avg_abs_margin_top5 <= 15.0`, use multisize for the whole game; otherwise use h19.
+- Syntax/smoke:
+  - `py_compile` passed.
+  - Single game vs Producer seed `127` completed without runtime error.
+- Stage1 eval:
+  - `logs/local_eval_20260616/mapselect15_stage1_seed127_134.json`
+  - vs h19 `6-6-4`.
+  - vs Producer `9-7`.
+  - vs oldv2 `6-10`.
+- Decision: do not submit. The selector preserves h19's Producer score but does not beat h19, and it still loses to oldv2. The wrapper also adds runtime complexity without a verified gain. Initial-map-only selection is not reliable enough; future conditional selection needs stronger behavior evidence or a safer integrated score modifier.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

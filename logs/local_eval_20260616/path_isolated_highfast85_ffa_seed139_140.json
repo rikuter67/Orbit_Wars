@@ -1,0 +1,326 @@
+[
+  {
+    "candidate": "highfast85",
+    "ffa": {
+      "errors": 0,
+      "losses": 0,
+      "rows": [
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 139,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 139,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 139,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "seed": 139,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        }
+      ],
+      "top2": 8,
+      "wins": 4
+    },
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "path": "candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py",
+    "seeds": [
+      139,
+      140
+    ]
+  },
+  {
+    "candidate": "h19",
+    "ffa": {
+      "errors": 0,
+      "losses": 0,
+      "rows": [
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 139,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 139,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 139,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "seed": 139,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 140,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        }
+      ],
+      "top2": 8,
+      "wins": 4
+    },
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "path": "/mnt/c/Users/rikuter/kaggle/Orbit_Wars/candidate_builds/producer_grid_20260614/h19_roi16_beta24_s14t14_2ponly/main.py",
+    "seeds": [
+      139,
+      140
+    ]
+  }
+]

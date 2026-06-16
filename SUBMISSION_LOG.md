@@ -445,6 +445,24 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `v2_mid`: h19 `2-2`, Producer `3-1`.
 - Decision: do not submit. The historical `exp48_restore`/`v2_mid` family is a real h19-like counter on some seeds, but it is too weak or unstable versus Producer (`exp48_restore` combined `2-6` vs Producer across `127-130`; `v2_mid` combined `3-5`). This matches the post-reset live collapse of the old v2 restore and is not safe while Producer clones remain common.
 
+### 2026-06-16 18:56-19:20 JST (exp48-to-h19 fallback selector, no submit)
+
+- Built experimental wrapper `candidate_builds/exp48_h19_selector_20260616/prod3_h19fallback`:
+  - 2P starts from historical `exp48_restore`.
+  - If observed enemy fleets match 3 predicted Producer-style launches, switch to h19.
+  - 4P always uses h19.
+  - Bundled `exp48_agent`, `h19_agent`, and `producer_agent` and added `orbit_lite` import-cache cleanup while loading each module.
+- Syntax:
+  - `py_compile` passed for wrapper `main.py`.
+- Submission-like string-path smoke:
+  - seed `127` vs h19: lost.
+  - seed `127` vs Producer: lost.
+- Found an evaluation caveat:
+  - `scripts/orbit_batch_eval.py` loads agents as Python functions with module cleanup, while Kaggle-style `env.run(["path/main.py", ...])` loads by file path.
+  - For historical `exp48_restore`, direct string-path smoke and function-loaded batch can disagree on the same seed, likely because these old multi-file agents are sensitive to import/module state.
+  - For submit decisions, prefer string-path smoke or archived extraction checks over function-loaded batch whenever a candidate bundles multiple agents or old `orbit_lite` copies.
+- Decision: do not submit or deepen this selector. The idea is conceptually useful, but the actual submission-like smoke fails immediately.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

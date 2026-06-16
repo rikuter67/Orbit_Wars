@@ -3,11 +3,62 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import re
+import sys
 import shutil
 import tempfile
 from pathlib import Path
+
+
+def _bootstrap_kaggle_environments() -> None:
+    """Fallback to local kaggle-environments source if installed package is incomplete."""
+    try:
+        import kaggle_environments.utils as env_utils
+        if hasattr(env_utils, "resolve_episode_seed"):
+            return
+    except Exception:
+        pass
+
+    candidates = []
+    env_src = os.environ.get("KAGGLE_ENVS_SRC")
+    if env_src:
+        candidates.append(Path(env_src).expanduser())
+    candidates.append(Path("/tmp/kaggle-environments-src"))
+
+    for candidate in candidates:
+        init_path = candidate / "kaggle_environments" / "__init__.py"
+        if not init_path.exists():
+            continue
+
+        candidate_str = str(candidate.resolve())
+        if candidate_str in sys.path:
+            sys.path.remove(candidate_str)
+        sys.path.insert(0, candidate_str)
+
+        for mod in [
+            "kaggle_environments",
+            "kaggle_environments.utils",
+            "kaggle_environments.envs",
+        ]:
+            if mod in sys.modules:
+                del sys.modules[mod]
+
+        try:
+            import kaggle_environments.utils as env_utils
+            if hasattr(env_utils, "resolve_episode_seed"):
+                return
+        except Exception:
+            continue
+
+    raise ModuleNotFoundError(
+        "kaggle_environments は orbit_wars を実行する条件を満たしていません。"
+        " KAGGLE_ENVS_SRC に有効なローカルソース（kaggle_environments 配下含む）を指定してください。"
+    )
+
+
+_bootstrap_kaggle_environments()
 
 from kaggle_environments import make
 

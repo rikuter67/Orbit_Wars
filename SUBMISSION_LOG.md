@@ -493,6 +493,14 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - combined path-mode seed `127-130`: h19 `5-3`, Producer `6-2`, oldv2 `2-6`.
 - Decision: do not submit. `h19params_multisize` has useful anti-Producer/self-like signal, but the path-mode oldv2 result is too weak for Live. `nonmine075` and `margin18_floor20` are also rejected despite strong Producer scores, because they fail either h19-like or oldv2-like matchups. The next Live submission still requires both a converged live-score snapshot and a candidate that clears the path-mode/public-family gate.
 
+### 2026-06-16 11:57 JST (live convergence snapshot, no submit)
+
+- Snapshot saved at `logs/snapshot_20260616_115717/status.md`.
+- Latest1 h19 ref `53714957` is complete at score `1227.5`, rank `214/4552`.
+- Latest2 Producer ref `53658218` is complete at score `1191.4`.
+- Cut lines: top5 `1224.1`, top3 `1254.4`, top2 `1289.1`.
+- Decision: no submit. Current live state remains stable enough to preserve, and no local candidate from the path-mode recheck clears the submit gate.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

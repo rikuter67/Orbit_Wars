@@ -316,6 +316,25 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `nonmine075`: h19 `2-6`, Producer `6-2`, oldv2 `6-2`, Kuni `8-0`, Carbon `8-0`.
 - Decision: do not submit. `nonmine075` is strong against Producer/oldv2/Kuni/Carbon but fails the h19-like matchup on independent seeds. Since h19/Producer clones are expected to be common, this remains too risky for Live without reliable opponent detection.
 
+### 2026-06-16 13:46-14:35 JST (gated nonmine075, no submit)
+
+- Generated feature CSV for `nonmine075`:
+  - `logs/local_eval_20260616/nonmine075_features_seed127_134_clean.csv`
+- Feature search:
+  - Single initial-map features still do not cleanly separate h19 losses from Producer/oldv2 wins.
+  - Tested two practical gates:
+    - `gate80avg20`: enable `nonmine075` only when `best_fast_value <= 80` and `avg_abs_margin_top5 >= 20`.
+    - `gatefast4`: enable `nonmine075` only when `my_fast_count >= 4`.
+  - Otherwise fall back to h19 behavior by forcing `size_multipliers=(1.0,)`.
+- Syntax/smoke:
+  - `py_compile` passed.
+  - Single game vs Producer seed `127` completed without runtime error.
+- Eval:
+  - `logs/local_eval_20260616/gated_nonmine075_seed127_134.json`
+  - `gate80avg20`: h19 `6-10`, Producer `10-6`, oldv2 `8-8`.
+  - `gatefast4`: h19 `4-8-4`, Producer `9-7`, oldv2 `6-10`.
+- Decision: do not submit. Gating can retain some Producer gain, but h19-like matchup remains worse than h19 baseline and the runtime cost is high. Initial-map gating is not sufficient for this family.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

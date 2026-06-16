@@ -7,6 +7,14 @@
 - Do not restore or submit anything before `2026-06-16 18:47 JST`.
 - Do not submit after `18:47 JST` unless the latest score is converged by script.
 
+Latest observed at `2026-06-16 16:45 JST`:
+
+- `highfast85`: `1150.0`
+- `h19`: `1241.9`
+- `convergence_report_orbit.py`: `NOT_CONVERGED`
+- `restore_readiness_orbit.py`: `restore_readiness=NO`
+- Note: recent spread can be `0.0` for short windows, but scored age and recent span still fail the wait gates.
+
 ## Check Sequence
 
 Run from `/mnt/c/Users/rikuter/kaggle/Orbit_Wars`:

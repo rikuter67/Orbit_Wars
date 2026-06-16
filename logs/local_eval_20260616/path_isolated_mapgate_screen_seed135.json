@@ -1,0 +1,222 @@
+[
+  {
+    "candidate": "lowfast70",
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "pairs": {
+      "producer": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_producer_mapgate_20260616/lowfast70/main.py",
+    "seeds": [
+      135
+    ]
+  },
+  {
+    "candidate": "lowfast80",
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "pairs": {
+      "producer": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_producer_mapgate_20260616/lowfast80/main.py",
+    "seeds": [
+      135
+    ]
+  },
+  {
+    "candidate": "lowfast80_floor20",
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "pairs": {
+      "producer": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_producer_mapgate_20260616/lowfast80_floor20/main.py",
+    "seeds": [
+      135
+    ]
+  },
+  {
+    "candidate": "lowfast80_floor20_margin18",
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "pairs": {
+      "producer": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_producer_mapgate_20260616/lowfast80_floor20_margin18/main.py",
+    "seeds": [
+      135
+    ]
+  },
+  {
+    "candidate": "lowfast70_floor20_margin20",
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "pairs": {
+      "producer": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 135,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_producer_mapgate_20260616/lowfast70_floor20_margin20/main.py",
+    "seeds": [
+      135
+    ]
+  }
+]

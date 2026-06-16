@@ -19,64 +19,62 @@
 
 ## 2) リポジトリ構成（再現に必要な意味）
 
-```text
-Orbit_Wars_git/
-  README.md                  ← この説明
-  LOG.md                     ← 現在運用版の要約
-  SUBMISSION_LOG.md          ← 提出理由・履歴・判定理由
-  LAST_WEEK_STRATEGY.md      ← 最終運用ルール
-  ORBIT_WARS_GLOSSARY.md
-  RESEARCH_NOTES.md
-  CHECKPOINT_PRODUCER_1211_3.md
-  MANUAL_RESTORE_STEPS.md
-  archive/
-    decisions/
-      restore_decision_20260616.md   ← 過去の復元判断メモ（必要時）
+まずはこの順番で読めば迷いません。
 
-  scripts/                  ← 再現・検証・提出・監査の実行スクリプト
-  candidate_builds/         ← 候補版のソース
-  logs/                     ← ローカル評価結果とライブ収束ログ
-  experiments/              ← 試作メモ（必要時）
-  submissions/              ← Kaggle提出用tar
-  producer_live_source/      ← 参照用公開版の取り込み
-```
+- **運用判断が知りたい** → `LOG.md`
+- **採否の根拠が知りたい** → `SUBMISSION_LOG.md`
+- **手順を実行したい** → この `README.md`
 
-### scripts/
+### A. まず固定して置くべき「再現コア」
 
-- `snapshot_orbit_status.py`  
-  Kaggle提出状況を取得して、最新2行の状態、保留、順位/カットを `logs/snapshot_*.md` に保存。
-- `cautious_submit_orbit.py`  
-  提出前に安全条件（時間間隔・収束・pending有無）をチェックして提出。
-- `post_submit_audit_orbit.py`  
-  提出直後に状態を再確認し、snapshot更新と運用ログ追加の起点を作る。
-- `orbit_path_eval_isolated.py` / `orbit_path_eval.py`  
-  候補をローカルで直接対戦させる。`orbit_path_eval_isolated.py` は環境依存を避けやすい。
-- `orbit_batch_eval.py`（補助）  
-  同形状候補同士の一括比較。
+| パス | 役割 |
+|---|---|
+| `README.md` | 再現手順と前提の全体像。 |
+| `LOG.md` | 現在運用中の状態（スコア/順位/直近判断）。 |
+| `SUBMISSION_LOG.md` | 全提出の生ログ（意図・評価結果・採否）。 |
 
-### candidate_builds/
+### B. 運用ルールを理解するための資料
 
-- 候補コードは次の形で1セット保持します。
-  - `candidate_builds/<テーマ>/<variant>/main.py`
-  - `candidate_builds/<テーマ>/<variant>/orbit_lite/`
-- 例: `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
+- `LAST_WEEK_STRATEGY.md` : 最終週の運用判断（2P/4P分岐、採用条件）。
+- `ORBIT_WARS_GLOSSARY.md` : 競技用語・指標の意味（Producer, top2 cutなど）。
+- `RESEARCH_NOTES.md` : 相談履歴、検討した方向性の背景。
+- `CHECKPOINT_PRODUCER_1211_3.md` : 運用上の節目ノート。
+- `MANUAL_RESTORE_STEPS.md` : 古い高スコア提出を戻すための手順。
 
-### logs/
+### C. 再現・比較・提出で毎回触る場所
 
-- `snapshot_YYYYMMDD_HHMMSS/status.md`  
-  時刻ごとのlive状態。収束確認の基準資料。
-- `local_eval_*.json`  
-  2P/4Pのローカル評価結果。採点・対戦相手・seedを残す。
+#### `scripts/`
 
-### submissions/
+- `snapshot_orbit_status.py` : Kaggle状況を取得して `logs/snapshot_*.md` を作る。
+- `cautious_submit_orbit.py` : 3条件ガード（間隔・収束・pending）を通して提出。
+- `post_submit_audit_orbit.py` : 送信後の状態再確認とログ起点作成。
+- `orbit_path_eval_isolated.py` / `orbit_path_eval.py` : ローカル対戦評価。
+- `orbit_batch_eval.py` : 候補同士の一括比較。
 
-- `submissions/<name>.tar.gz` は Kaggle 提出時点の再現物。
-- 参照用として保存し、再現は `candidate_builds` 側を正として行います。
+#### `candidate_builds/`
 
-### archive/
+候補はこの構成で固定:
 
-- `decisions/restore_decision_20260616.md` は 6/16 の復元判断を記録した履歴ノート。
-- 日々の再現・提出フローには不要なため、提出可否の判断は `LOG.md` と `SUBMISSION_LOG.md` で完結させます。
+- `candidate_builds/<テーマ>/<variant>/main.py`
+- `candidate_builds/<テーマ>/<variant>/orbit_lite/`
+
+再現の対象は `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/`。
+
+#### `logs/`
+
+- `snapshot_YYYYMMDD_HHMMSS/status.md` : live収束の時系列。
+- `local_eval_*.json` : 2P/4Pのローカル評価結果。
+
+#### `submissions/`
+
+- `submissions/<name>.tar.gz` : Kaggle提出物（再現確認の実体）。
+- **再現用の比較先としては** `candidate_builds` を正とする。
+
+### D. 補助資料
+
+- `experiments/` : 試作ノート（進行中実験）。
+- `archive/decisions/restore_decision_20260616.md` : 6/16復元判断の履歴メモ（必要時参照）。
+- `producer_live_source/` : 参照用の公開版取り込み。
 
 ---
 

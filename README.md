@@ -26,7 +26,7 @@
 
 ### ファイルごとの役割（この版で運用）
 
-この運用では、`LOG.md` は補助扱いで、**実行判断の正本はこの README + SUBMISSION_LOG** です。
+この運用では、実行判断の正本はこの README + `SUBMISSION_LOG.md` です。
 
 - `README.md`（ここ）: 手順・判断ルール・再現コマンドの正本
 - `SUBMISSION_LOG.md`: 全提出の全履歴（正確な根拠）
@@ -212,4 +212,3 @@ tar -tf ../../../submissions/highfast85_repro_pack_20260617.tar.gz
 2. 本節 2（再現フロー）
 3. 本節 6（ログ運用）
 4. `SUBMISSION_LOG.md`（全履歴確認）
-

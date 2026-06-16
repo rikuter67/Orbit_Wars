@@ -49,8 +49,10 @@ pip install "kaggle-environments>=1.28.0" kaggle
 ### 2-2. リポジトリ起点
 
 ```bash
-cd /mnt/c/Users/rikuter/kaggle/Orbit_Wars_git
+cd /path/to/repo/Orbit_Wars_git
 ```
+
+※あなたの環境に合わせて `path/to/repo` を実際のパスに置き換えてください。
 
 ### 2-3. 提出候補のアーカイブ（例: highfast85）
 

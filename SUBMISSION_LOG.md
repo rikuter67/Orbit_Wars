@@ -521,6 +521,20 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - Producer does not show simple launch-time partial behavior in these traces; the observed regression is not safe to attribute to a clean oldv2-only detector.
 - Decision: do not submit. The partial-launch switch is a useful anti-oldv2 idea, but every working oldv2 version costs too much against Producer or h19-like opponents. Current Live h19 remains safer.
 
+### 2026-06-16 13:00 JST (partial70 risk soft-penalty probe, no submit)
+
+- Built h19-derived soft-penalty candidates under `candidate_builds/h19_partial_risk_softpenalty_20260616/`.
+  - Detection: 2P only, observe enemy fleet/source ratio between `0.65` and `0.75` early. This is narrower than the previous partial95 detector to avoid Producer false positives.
+  - `partial70_drain12` and `partial70_drain24`: after detection, penalize high-drain attacks from pressured source planets.
+  - `partial70_def2`: after detection, add a small bonus to defensive/reinforcement candidates targeting owned planets.
+- Path-mode seed `127-130`:
+  - `logs/local_eval_20260616/path_eval_partial70_risk_seed127_130.json`
+  - `partial70_drain12`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
+  - `partial70_drain24`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
+  - `logs/local_eval_20260616/path_eval_partial70_def2_seed127_130.json`
+  - `partial70_def2`: h19 `3-3-2`, Producer `5-3`, oldv2 `1-7`.
+- Decision: do not submit. The narrower detector avoids the worst Producer collapse, and defensive boosting is better than drain penalties, but oldv2 improvement is far too small. Next direction should search for a stronger owned-planet defense/regroup response without switching to full multisize.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

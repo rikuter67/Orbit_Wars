@@ -25,7 +25,6 @@ Orbit_Wars_git/
   LOG.md                     ← 現在運用版の要約
   SUBMISSION_LOG.md          ← 提出理由・履歴・判定理由
   LAST_WEEK_STRATEGY.md      ← 最終運用ルール
-  RESTORE_DECISION_20260616.md
   ORBIT_WARS_GLOSSARY.md
   RESEARCH_NOTES.md
   CHECKPOINT_PRODUCER_1211_3.md
@@ -82,6 +81,20 @@ Orbit_Wars_git/
 ---
 
 ## 3) 採用版の再現（highfast85）
+
+### 3-0) 再現対象（提出コメント付き）
+
+このガイドで再現するのは、以下の提出コメントと一致する版です。
+
+`highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
+
+意味:
+
+- 2人戦では `best_fast >= 85` のときに Producer 的な攻勢ルートへ切り替える。
+- 4人戦は既存の Producer4P 構成（top2維持優先）を維持する。
+- 比較相手は `h19, Producer, oldv2, Kuni, Carbon` の既定構成で、seed帯は上記コメントの範囲。
+- `candidate_builds/h19_highfast_producer_gate_20260616/highfast85` が再現の正本。
+- `submissions/highfast85_producer_gate_20260616.tar.gz` はその再現成果物。
 
 ### 3-1) 手法の要点
 

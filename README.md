@@ -1,106 +1,138 @@
-# Orbit Wars 実験用ワークスペース（再現重視）
+# Orbit Wars 再現・運用ガイド（最短版）
 
-このリポジトリは **Orbit Wars** 用の実験コードと提出管理を行う作業場です。  
-ローカルの `git push` と提出準備は、このフォルダを起点に実行します。
+このリポジトリでやることは1つです。
 
-## 優先対象（再現すべきもの）
+1) 実装を再現する
+2) ローカルでテストする
+3) 収束条件を満たしたら提出する
 
-**他人が今提出している上位再現対象**
+ここでは高最優先の再現対象を固定し、同じ結果を他人が再現できる状態にします。
+
+---
+
+## 今最優先の提出再現対象
+
 - `H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
 
-再現手順として最低限揃えるファイル:
+再現に必要なもの:
+
 - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
 - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
 - `submissions/highfast85_producer_gate_20260616.tar.gz`
 - `scripts/cautious_submit_orbit.py` の `highfast85` エントリ
 
-## highfast85再現手順（提出コメントの再現）
+---
 
-1. 元実装（highfast90）との差分が 1 点だけ（`best_fast>=90.0` → `best_fast>=85.0`）であることを確認。
-2. 候補ディレクトリを再圧縮（必要なら）  
+## 5分で動ける手順
 
-```bash
-cd candidate_builds/h19_highfast_producer_gate_20260616/highfast85
-tar -czf ../../../submissions/repro_highfast85.tar.gz main.py orbit_lite
-```
-
-3. 先に運用を確認
+### A. 環境準備
 
 ```bash
-python3 scripts/cautious_submit_orbit.py highfast85
-```
-
-4. 取得すべき提出コメント（固定）
-   - `H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
-
-このコメント文と `submissions/highfast85_producer_gate_20260616.tar.gz` が一致していれば、他者は同条件で提出再現できます。
-
-## 今後の運用ルール
-
-- `main` は保守用。  
-- 実験は `exp/<experiment-name>-YYYYMMDD` 形式のブランチで行う。
-- 提出や比較結果は同名ブランチで管理し、`SUBMISSION_LOG.md` に意思決定を残す。
-- `scripts/cautious_submit_orbit.py` を使って、提出前に 3 時間ルールと収束チェックを通す。
-- `GitHub` は `https://github.com/rikuter67/Orbit_Wars`。
-
-## ディレクトリ構成（短縮）
-
-- `candidate_builds/`: 週次の候補バリアント（実験フォルダ）。
-- `experiments/`: ローカル限定の試作。
-- `submissions/`: 実提出アーカイブ（`.tar.gz`）。
-- `scripts/`: ローカル評価、提出ゲート、ログ取得。
-- `logs/`: `snapshot_YYYY.../status.md` やローカル評価結果。
-- `SUBMISSION_LOG.md`: いつ、何を、なぜ、提出/不提出したかの履歴。
-
-## 最短スタートアップ
-
-```bash
-cd /mnt/c/Users/rikuter/kaggle/Orbit_Wars_git
+cd /path/to/your/Orbit_Wars_git
 python -m venv .venv-orbit311
-source .venv-orbit311/bin/activate  # Windowsなら Scripts\Activate
+source .venv-orbit311/bin/activate  # Windows なら .venv-orbit311\Scripts\Activate
+pip install --upgrade pip
 pip install "kaggle-environments>=1.28.0" kaggle torch
 ```
 
-### ローカル比較例（2P）
+### B. まずは差分だけ確認する（重要）
+
+```bash
+git status
+```
+
+`highfast85` 版が 90→85 になっているかを確認:
+
+```bash
+grep -n "best_fast" candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
+```
+
+期待: `>= 85.0`（highfast90なら `>= 90.0`）。
+
+### C. 最低限ローカルチェック
+
+#### 2Pローカル評価
 
 ```bash
 python3 scripts/orbit_path_eval_isolated.py \
-  --candidate test=experiments/low_value_trapguard \
+  --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
   --opponent slawek=submissions/slawek_producer_v2_20260613.tar.gz \
   --seeds 127,128,129,130 \
-  --out logs/local_eval_20260617/repro_check.json
+  --out logs/local_eval_20260617/highfast85_seed127_130.json
 ```
 
-### 提出準備（推奨）
-
-1. `scripts/snapshot_orbit_status.py` で現状の提出状態を記録。  
-2. `python3 scripts/cautious_submit_orbit.py <candidate_key>`（キーは `scripts/cautious_submit_orbit.py` の `CANDIDATES`）
-3. `python3 scripts/post_submit_audit_orbit.py` で提出直後監査を `SUBMISSION_LOG.md` に追記。
-
-### 再提出アーカイブ作成
+#### 4P（必要なら）
 
 ```bash
-cd candidate_builds/h19_producer_mapgate_20260616/highfast85  # 例: candidate directory
-tar -czf ../submissions/repro_test_20260617.tar.gz main.py orbit_lite
+python3 scripts/orbit_path_eval_isolated.py \
+  --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
+  --ffa-opponents submissions/slawek_producer_v2_20260613.tar.gz,submissions/kuni_lb1240_clean.tar.gz,submissions/carbon_top1_fork_output.tar.gz \
+  --seeds 127,128 \
+  --out logs/local_eval_20260617/highfast85_ffa_seed127_128.json
 ```
 
-## 再現性のルール（他人が回せる状態にするため）
+### D. 提出アーカイブの整合を作る
 
-- パス依存を避けるため、運用スクリプトは固定の `/mnt/.../Orbit_Wars` パスを使わず、リポジトリから相対参照に寄せる。
-- 変更は最小単位のブランチで行い、PR/コミット単位で実験ログと紐付ける。
-- 新規提出物は必ず `submissions/` に保存し、圧縮内容（`main.py` + `orbit_lite/`）を確認してから提出する。
+```bash
+cd candidate_builds/h19_highfast_producer_gate_20260616/highfast85
+tar -czf ../../../submissions/highfast85_repro_pack_20260617.tar.gz main.py orbit_lite
+```
 
-## 既存ノートへの入り口
+この `tar.gz` を提出するなら、`main.py + orbit_lite` だけが入っていることを確認。
 
-- `SUBMISSION_LOG.md`: 提出意思決定の時系列ログ
-- `LAST_WEEK_STRATEGY.md`: 直近の方針（優先）
-- `RESTORE_DECISION_20260616.md`: リカバリ判断の記録
-- `ORBIT_WARS_GLOSSARY.md`: 用語メモ
+### E. 提出前のゲート通し
 
-## チェック項目（他者引き継ぎ）
+```bash
+python3 scripts/snapshot_orbit_status.py
+python3 scripts/cautious_submit_orbit.py highfast85
+python3 scripts/post_submit_audit_orbit.py
+```
 
-- [ ] ブランチ名が `exp/...` 形式か  
-- [ ] 主要ファイル変更後に `python -m py_compile` を通したか  
-- [ ] ローカル評価JSONが保存されたか  
-- [ ] `snapshot_orbit_status.py` と `SUBMISSION_LOG.md` が更新されているか  
-- [ ] 提出時コメント（`CANDIDATES` の message）に変更要点が入っているか
+`python3 scripts/cautious_submit_orbit.py highfast85` が通過するまで提出しない。
+
+---
+
+## 提出コメントの固定文（コピペ）
+
+以下を `CANDIDATES` のメッセージとして使う（再現固定）:
+
+`H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
+
+---
+
+## 変更後はここに残す
+
+- `SUBMISSION_LOG.md`（提出/非提出の判断）
+- `logs/` の `snapshot_YYYYMMDD_HHMMSS/status.md`（提出前後）
+- `logs/local_eval_...json`（評価結果）
+
+---
+
+## ざっくり構成（迷わないため）
+
+- `candidate_builds/`：提出候補（highfast85など）
+- `experiments/`：ローカル実験
+- `submissions/`：提出用圧縮ファイル
+- `scripts/`：評価・提出ゲート
+- `logs/`：実行ログ/スナップショット
+
+---
+
+## 失敗しやすいポイント
+
+- `main.py` や `orbit_lite/` を除いて圧縮すると壊れる
+- 毎回日付でブランチ名を付けるのではなく、内容で名前を付ける
+- `py_compile` を通さないまま提出する
+
+```bash
+python3 -m py_compile candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
+```
+
+---
+
+## 参考
+
+- `SUBMISSION_LOG.md`
+- `LAST_WEEK_STRATEGY.md`
+- `RESTORE_DECISION_20260616.md`
+- `ORBIT_WARS_GLOSSARY.md`

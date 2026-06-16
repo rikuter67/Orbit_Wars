@@ -372,6 +372,23 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - vs h19 `2-2`, vs Producer `4-0`, vs oldv2 `4-0`, vs Kuni `2-2`, vs Carbon `2-2`.
   - Final decision for this candidate: do not submit. Across 4P seeds `69-80`, the mixed candidate is top2-stable (`48/48`) but only wins `23/48`; h19 wins `22/48` with one top2 miss. That is not enough upside to spend a Live submission, especially because h19 currently has a stable score above the top5 cut.
 
+### 2026-06-16 15:36-16:40 JST (action-gated nonmine075, no submit)
+
+- Built three behavior-gated multisize variants under `candidate_builds/h19_actiongated_multisize_20260616/`:
+  - `prod3_nonmine075`: enable `size_multipliers=(0.75, 1.0)` only after 3 predicted-Producer enemy launch matches; otherwise force `(1.0,)`.
+  - `prod4_nonmine075`: same, but requires 4 matches.
+  - `prod3_early80_nonmine075`: same as `prod3`, but the gate can only activate through turn 80.
+  - 4P always forces `(1.0,)` so this experiment is 2P-only.
+- Syntax/smoke:
+  - `py_compile` passed for all three variants.
+  - `prod3_nonmine075` single smoke vs Producer seed `127` completed and won.
+- Stage1 eval:
+  - `logs/local_eval_20260616/actiongated_nonmine075_stage1_seed127_130.json`
+  - `prod3`: h19 `2-6`, Producer `5-3`, oldv2 `2-6`.
+  - `prod4`: h19 `0-8`, Producer `5-3`, oldv2 `2-6`.
+  - `prod3early80`: h19 `2-6`, Producer `5-3`, oldv2 `2-6`.
+- Decision: do not submit and do not deepen. The Producer-specific gain exists, but the behavior detector still false-positives on h19-like opponents and does not help oldv2. This confirms that simple predicted-launch match counts are not a reliable enough opponent model for switching a high-impact planner change. Future opponent modeling should use lower-impact local score shaping or require negative evidence that separates h19-like behavior, not only positive Producer matches.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

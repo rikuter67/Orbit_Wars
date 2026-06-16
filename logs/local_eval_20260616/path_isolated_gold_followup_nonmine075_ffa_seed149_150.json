@@ -1,0 +1,164 @@
+[
+  {
+    "candidate": "nonmine075",
+    "ffa": {
+      "errors": 0,
+      "losses": 0,
+      "rows": [
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "seed": 149,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "seed": 149,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "seed": 149,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "seed": 149,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            -1,
+            1
+          ],
+          "seed": 150,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 150,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 150,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 150,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        }
+      ],
+      "top2": 8,
+      "wins": 4
+    },
+    "isolation": "renamed orbit_lite package per agent copy",
+    "mode": "path_isolated",
+    "path": "candidate_builds/h19_targeted_multisize_20260616/nonmine075/main.py",
+    "seeds": [
+      149,
+      150
+    ]
+  }
+]

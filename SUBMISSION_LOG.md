@@ -535,6 +535,19 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `partial70_def2`: h19 `3-3-2`, Producer `5-3`, oldv2 `1-7`.
 - Decision: do not submit. The narrower detector avoids the worst Producer collapse, and defensive boosting is better than drain penalties, but oldv2 improvement is far too small. Next direction should search for a stronger owned-planet defense/regroup response without switching to full multisize.
 
+### 2026-06-16 13:08 JST (partial source local defense/avoid probe, no submit)
+
+- Built h19-derived local partial-source candidates under `candidate_builds/h19_partial_source_local_20260616/`.
+  - Detection: observe enemy fleet/source ratio between `0.65` and `0.75` before turn `45`, then remember the enemy source planet.
+  - Scoring: only candidate targets within distance `25` of the remembered partial source are adjusted.
+  - `local_def3_avoid2`: owned local targets `+3`, non-owned local targets `-2`.
+  - `local_def5_avoid3`: owned local targets `+5`, non-owned local targets `-3`.
+- Path-mode seed `127-130`:
+  - `logs/local_eval_20260616/path_eval_partial_source_local_seed127_130.json`
+  - `local_def3_avoid2`: h19 `3-3-2`, Producer `4-4`, oldv2 `0-8`.
+  - `local_def5_avoid3`: h19 `4-2-2`, Producer `4-4`, oldv2 `0-8`.
+- Decision: do not submit. Localized partial-source defense/avoidance does not fix the oldv2 counter on this hostile seed band. The only tested family that reliably helps oldv2 remains `m05_100`/multisize, but it is too costly versus Producer unless selected much more accurately.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

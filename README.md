@@ -62,22 +62,9 @@ iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchan
 pip install "kaggle-environments>=1.28.0" kaggle
 ```
 
-### 2-2. リポジトリ起点
+### 2-2. ローカル単体対戦（再現最重要）
 
-```bash
-cd /path/to/repo/Orbit_Wars_git
-```
-
-※あなたの環境に合わせて `path/to/repo` を実際のパスに置き換えてください。
-
-### 2-3. 提出候補のアーカイブ（例: highfast85）
-
-```bash
-cd candidate_builds/h19_highfast_producer_gate_20260616/highfast85
-tar -czf ../../../submissions/highfast85_repro_pack_20260617.tar.gz main.py orbit_lite
-```
-
-### 2-4. ローカル単体対戦（再現最重要）
+この節は、リポジトリのルート（`Orbit_Wars_git`）で実行する前提です。
 
 ここが通らない候補は、提出前で止めます。まずローカルで「再現性」を担保し、
 それが成立してから live へ進みます。
@@ -141,10 +128,10 @@ python3 scripts/orbit_path_eval_isolated.py \
   --out logs/local_eval_20260616/example_check_ffa.json
 ```
 
-### 2-5. 提出（候補を採用した場合）
+### 2-3. 提出（候補を採用した場合）
 
 このコマンドは、採用判断が最終確定した時だけ実行します。
-ここは「最終提出手段」なので、`2-6` の最低チェックを先に満たすことが前提です。
+ここは「最終提出手段」なので、`2-4` の最低チェックを先に満たすことが前提です。
 
 目的:
 
@@ -171,28 +158,28 @@ python3 scripts/post_submit_audit_orbit.py
 異常時:
 
 - pending が直前で重なっていたり、認証情報不足なら提出は失敗。
-- その場合は `2-6` の提出前チェックを再チェックして、`scripts/cautious_submit_orbit.py` を推奨。
+- その場合は `2-4` の提出前チェックを再チェックして、`scripts/cautious_submit_orbit.py` を推奨。
 
 ```bash
 kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20260616.tar.gz \
   -m "highfast85_producer_gate_20260616 | 2P best_fast>=85 gate"
 ```
 
-### 2-6. 提出前の最低チェック
+### 2-4. 提出前の最低チェック
 
 以下は提出可否の最終ゲートです。どれか1つでも満たさなければ提出前の状態を凍結せず、ここで止めます。
 
-#### 2-6-a. コード整合チェック
+#### 2-4-a. コード整合チェック
 
 - `py_compile` 済み
   - `python3 -m py_compile <candidate>/main.py`
 
-#### 2-6-b. 一貫性チェック
+#### 2-4-b. 一貫性チェック
 
 - 同一候補を2バッチ以上で同傾向確認
   - 最低でも `--seeds 127-130` と別帯域
 
-#### 2-6-c. 収束チェック（live）
+#### 2-4-c. 収束チェック（live）
 
 - live スコア収束
   - 直近 100分以上
@@ -204,7 +191,7 @@ kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20
   - `score spread <= 35.0`
   - latest2 no pending
 
-#### 2-6-d. 進行保護チェック
+#### 2-4-d. 進行保護チェック
 
 - latest2 が `pending` でないこと
 

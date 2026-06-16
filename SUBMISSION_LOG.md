@@ -501,6 +501,26 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
 - Cut lines: top5 `1224.1`, top3 `1254.4`, top2 `1289.1`.
 - Decision: no submit. Current live state remains stable enough to preserve, and no local candidate from the path-mode recheck clears the submit gate.
 
+### 2026-06-16 12:46 JST (oldv2 partial-launch switch probe, no submit)
+
+- Rechecked lightweight h19 knob variants with path-mode execution:
+  - `logs/local_eval_20260616/path_eval_local_knobs_seed127_128.json`
+  - Best small knobs on seed `127-128`: `roi155`, `w7`, `s16t14`, and `s14t16` all beat Producer `4-0` while preserving h19 at tie-or-better, but all lose oldv2 `0-4`.
+  - `s14t16` failed the follow-up on seed `129-130`: h19 `2-2`, Producer `0-4`, oldv2 `0-4` in `logs/local_eval_20260616/path_eval_integrated_and_s14t16_seed129_130.json`.
+- Tested integrated multisize variants as possible oldv2 escape modes:
+  - `m05_100` on seed `129-130`: oldv2 `3-1`, h19 `2-2`, but Producer `0-4`.
+  - Other integrated multisize variants did not solve oldv2 reliably.
+- Built oldv2 partial-launch switch candidates under `candidate_builds/h19_oldv2_partial_switch_20260616/`:
+  - `partial95_m05`: wrapper loading two separate agents; rejected immediately because path-mode execution lost `0-4` to h19/Producer/oldv2, likely due module-state contamination between bundled `orbit_lite` copies.
+  - `integrated_partial95_m05`: single-code m05-derived conditional switch. Combined seed `127-134`: h19 `7-7-2`, Producer `6-10`, oldv2 `13-3`. Strong oldv2 improvement, but Producer regression is too large.
+  - `h19_exact_partial95_m05`: h19-derived conditional switch. On seed `131-134`: h19 `3-5`, Producer `2-6`, oldv2 `8-0`.
+  - `h19_exact_partial75_m05`: stricter threshold variant. Producer-only seed `131-134` still `2-6`, so the issue is not fixed by a lower partial ratio threshold.
+- Diagnostic traces:
+  - `logs/local_eval_20260616/integrated_partial95_vs_producer_actions_seed131_134.csv`
+  - `logs/local_eval_20260616/h19_exact_partial95_vs_producer_actions_seed131_134.csv`
+  - Producer does not show simple launch-time partial behavior in these traces; the observed regression is not safe to attribute to a clean oldv2-only detector.
+- Decision: do not submit. The partial-launch switch is a useful anti-oldv2 idea, but every working oldv2 version costs too much against Producer or h19-like opponents. Current Live h19 remains safer.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

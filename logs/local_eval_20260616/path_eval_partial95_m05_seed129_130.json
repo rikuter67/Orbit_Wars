@@ -1,0 +1,184 @@
+[
+  {
+    "candidate": "partial95_m05",
+    "mode": "path",
+    "pairs": {
+      "h19": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 4,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      },
+      "oldv2": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 4,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      },
+      "producer": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 4,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_oldv2_partial_switch_20260616/partial95_m05/main.py",
+    "seeds": [
+      129,
+      130
+    ]
+  }
+]

@@ -1,0 +1,120 @@
+[
+  {
+    "candidate": "h19_exact_partial95_m05",
+    "mode": "path",
+    "pairs": {
+      "producer": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 6,
+        "rows": [
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 131,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 131,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 132,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 132,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 133,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 133,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 134,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 134,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "path": "candidate_builds/h19_oldv2_partial_switch_20260616/h19_exact_partial95_m05/main.py",
+    "seeds": [
+      131,
+      132,
+      133,
+      134
+    ]
+  }
+]

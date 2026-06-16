@@ -1,0 +1,730 @@
+[
+  {
+    "candidate": "m05_100",
+    "mode": "path",
+    "pairs": {
+      "h19": {
+        "diff_sum": 0.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 2
+      },
+      "oldv2": {
+        "diff_sum": 4.0,
+        "errors": 0,
+        "losses": 1,
+        "rows": [
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 3
+      },
+      "producer": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 4,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_integrated_multisize_20260616/m05_100/main.py",
+    "seeds": [
+      129,
+      130
+    ]
+  },
+  {
+    "candidate": "m05_075_100",
+    "mode": "path",
+    "pairs": {
+      "h19": {
+        "diff_sum": 8.0,
+        "errors": 0,
+        "losses": 0,
+        "rows": [
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 4
+      },
+      "oldv2": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 3,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 1
+      },
+      "producer": {
+        "diff_sum": 0.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "path": "candidate_builds/h19_integrated_multisize_20260616/m05_075_100/main.py",
+    "seeds": [
+      129,
+      130
+    ]
+  },
+  {
+    "candidate": "m075_100",
+    "mode": "path",
+    "pairs": {
+      "h19": {
+        "diff_sum": 4.0,
+        "errors": 0,
+        "losses": 1,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 3
+      },
+      "oldv2": {
+        "diff_sum": -4.0,
+        "errors": 0,
+        "losses": 3,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 1
+      },
+      "producer": {
+        "diff_sum": 4.0,
+        "errors": 0,
+        "losses": 1,
+        "rows": [
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 3
+      }
+    },
+    "path": "candidate_builds/h19_integrated_multisize_20260616/m075_100/main.py",
+    "seeds": [
+      129,
+      130
+    ]
+  },
+  {
+    "candidate": "s14t16",
+    "mode": "path",
+    "pairs": {
+      "h19": {
+        "diff_sum": 0.0,
+        "errors": 0,
+        "losses": 2,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": 1,
+            "diff": 2,
+            "opponent": -1,
+            "outcome": "W",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 2
+      },
+      "oldv2": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 4,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      },
+      "producer": {
+        "diff_sum": -8.0,
+        "errors": 0,
+        "losses": 4,
+        "rows": [
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 129,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": false
+          },
+          {
+            "candidate": -1,
+            "diff": -2,
+            "opponent": 1,
+            "outcome": "L",
+            "seed": 130,
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "swapped": true
+          }
+        ],
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "path": "candidate_builds/h19_local_knobs_20260616/s14t16/main.py",
+    "seeds": [
+      129,
+      130
+    ]
+  }
+]

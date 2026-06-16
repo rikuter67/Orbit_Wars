@@ -77,7 +77,6 @@
 ### 2-5. 補助
 
 - `experiments/` : 試作メモ。
-- `archive/decisions/restore_decision_20260616.md` : 6/16 の復元判断（必要時参照）。
 - `producer_live_source/` : 公開版の参照コピー。
 
 ---
@@ -261,4 +260,3 @@ tar -tf ../../../submissions/highfast85_repro_pack_20260617.tar.gz
 - `SUBMISSION_LOG.md`: 全提出の意思決定
 - `logs/snapshot_YYYYMMDD_HHMMSS/status.md`: live 収束・pending・順位
 - `logs/local_eval_*.json`: 2P/4P 比較結果
-

@@ -44,6 +44,14 @@ CANDIDATES = {
         ROOT / 'submissions' / 'h18_roi13_beta18_2ponly_20260614.tar.gz',
         'ProducerV2 2P-only variant | H18 ROI1.3 beta1.8 | 17-11 vs Producer | exact 4P | 20260614',
     ),
+    'h19_safety_restore': (
+        ROOT / 'submissions' / 'h19_s14t14_2ponly_producer4p_20260614.tar.gz',
+        'H19 safety restore | ROI1.6 beta2.4 S14T14 | 2P h19 stable 1241.9 before highfast85 | 4P Producer exact | 20260616',
+    ),
+    'highfast85': (
+        ROOT / 'submissions' / 'highfast85_producer_gate_20260616.tar.gz',
+        'H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616',
+    ),
 }
 
 

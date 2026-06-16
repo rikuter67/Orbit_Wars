@@ -480,6 +480,19 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - path-mode selector vs Producer seed `127`: `0-2`.
 - Decision: no submit. Keep using `orbit_path_eval.py` for any future candidate that bundles old public agents, multiple `orbit_lite` copies, or wrapper selectors. Function-loaded `orbit_batch_eval.py` is still useful for homogeneous h19-family variants but is not authoritative for old multi-file agents.
 
+### 2026-06-16 11:56 JST (path-mode promising-candidate recheck, no submit)
+
+- Rechecked the best-looking recent Producer-target/oldv2 candidates with `scripts/orbit_path_eval.py`, using Kaggle-like path execution instead of in-process function loading:
+  - `logs/local_eval_20260616/path_eval_promising_seed127_128.json`
+  - `nonmine075`: h19 `0-4`, Producer `4-0`, oldv2 `2-2`.
+  - `h19params_multisize`: h19 `2-2`, Producer `4-0`, oldv2 `2-2`.
+  - `margin18_floor20`: h19 `0-0-4`, Producer `4-0`, oldv2 `0-4`.
+- Advanced only `h19params_multisize` to additional path-mode seeds because it was the only candidate that did not immediately collapse against h19-like or oldv2-like baselines:
+  - `logs/local_eval_20260616/path_eval_h19params_multisize_seed129_130.json`
+  - seed `129-130`: h19 `3-1`, Producer `2-2`, oldv2 `0-4`.
+  - combined path-mode seed `127-130`: h19 `5-3`, Producer `6-2`, oldv2 `2-6`.
+- Decision: do not submit. `h19params_multisize` has useful anti-Producer/self-like signal, but the path-mode oldv2 result is too weak for Live. `nonmine075` and `margin18_floor20` are also rejected despite strong Producer scores, because they fail either h19-like or oldv2-like matchups. The next Live submission still requires both a converged live-score snapshot and a candidate that clears the path-mode/public-family gate.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

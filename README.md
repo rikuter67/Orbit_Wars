@@ -3,6 +3,38 @@
 このリポジトリは **Orbit Wars** 用の実験コードと提出管理を行う作業場です。  
 `git push` 可能な基準リポジトリとして、今後は **`/mnt/c/Users/rikuter/kaggle/Orbit_Wars_git`** を使います。
 
+## 優先対象（再現すべきもの）
+
+**他人が今提出している上位再現対象**
+- `H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
+
+再現手順として最低限揃えるファイル:
+- `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
+- `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
+- `submissions/highfast85_producer_gate_20260616.tar.gz`
+- `scripts/cautious_submit_orbit.py` の `highfast85` エントリ
+
+## highfast85再現手順（提出コメントの再現）
+
+1. 元実装（highfast90）との差分が 1 点だけ（`best_fast>=90.0` → `best_fast>=85.0`）であることを確認。
+2. 候補ディレクトリを再圧縮（必要なら）  
+
+```bash
+cd candidate_builds/h19_highfast_producer_gate_20260616/highfast85
+tar -czf ../../../submissions/repro_highfast85.tar.gz main.py orbit_lite
+```
+
+3. 先に運用を確認
+
+```bash
+python3 scripts/cautious_submit_orbit.py highfast85
+```
+
+4. 取得すべき提出コメント（固定）
+   - `H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
+
+このコメント文と `submissions/highfast85_producer_gate_20260616.tar.gz` が一致していれば、他者は同条件で提出再現できます。
+
 ## 今後の運用ルール
 
 - `main` は保守用。  

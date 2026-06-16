@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import datetime as dt
 import fcntl
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -14,6 +15,10 @@ SUBMIT_LOCK = ROOT / 'logs' / 'submit.lock'
 LOG = ROOT / 'logs' / 'cautious_submit_orbit.log'
 MIN_SUBMIT_GAP = dt.timedelta(hours=3)
 MIN_PRODUCER_SAFETY_SCORE_FOR_EXPERIMENT = 1150.0
+CONVERGENCE_WINDOW = dt.timedelta(minutes=100)
+CONVERGENCE_MIN_POINTS = 3
+CONVERGENCE_MIN_SPAN = dt.timedelta(minutes=45)
+CONVERGENCE_MAX_SPREAD = 35.0
 
 CANDIDATES = {
     'producer_v2': (
@@ -74,6 +79,86 @@ def parse_kaggle_date(value) -> dt.datetime:
     return parsed.astimezone(JST)
 
 
+def score_float(value) -> float | None:
+    text = str(value or '').strip()
+    if not text:
+        return None
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
+def snapshot_time(path: Path) -> dt.datetime | None:
+    match = re.search(r'snapshot_(\d{8})_(\d{6})', str(path))
+    if not match:
+        return None
+    try:
+        parsed = dt.datetime.strptime(''.join(match.groups()), '%Y%m%d%H%M%S')
+    except ValueError:
+        return None
+    return parsed.replace(tzinfo=JST)
+
+
+def score_from_status(path: Path, ref: str) -> float | None:
+    try:
+        text = path.read_text(encoding='utf-8')
+    except OSError:
+        return None
+    pattern = re.compile(
+        rf'^\|\s*{re.escape(str(ref))}\s*\|.*\|\s*SubmissionStatus\.COMPLETE\s*\|\s*([0-9.]+)\s*\|',
+        re.MULTILINE,
+    )
+    match = pattern.search(text)
+    if not match:
+        return None
+    return score_float(match.group(1))
+
+
+def score_has_converged(ref: str, current_score: float | None) -> bool:
+    now = dt.datetime.now(JST)
+    samples: list[tuple[dt.datetime, float]] = []
+    for status in (ROOT / 'logs').glob('snapshot_*/status.md'):
+        ts = snapshot_time(status)
+        if ts is None or now - ts > CONVERGENCE_WINDOW:
+            continue
+        score = score_from_status(status, ref)
+        if score is not None:
+            samples.append((ts, score))
+    if current_score is not None:
+        samples.append((now, current_score))
+
+    dedup: dict[str, tuple[dt.datetime, float]] = {}
+    for ts, score in samples:
+        dedup[ts.strftime('%Y%m%d%H%M%S')] = (ts, score)
+    samples = sorted(dedup.values(), key=lambda item: item[0])
+
+    if len(samples) < CONVERGENCE_MIN_POINTS:
+        log(
+            f'latest score convergence not proven for ref={ref}: '
+            f'{len(samples)} samples < {CONVERGENCE_MIN_POINTS}'
+        )
+        return False
+    span = samples[-1][0] - samples[0][0]
+    scores = [score for _, score in samples]
+    spread = max(scores) - min(scores)
+    detail = ', '.join(f'{ts:%H:%M}={score:.1f}' for ts, score in samples)
+    log(
+        f'latest score convergence samples for ref={ref}: '
+        f'span={span}, spread={spread:.1f}, points=[{detail}]'
+    )
+    if span < CONVERGENCE_MIN_SPAN:
+        log(f'latest score convergence not proven: span {span} < {CONVERGENCE_MIN_SPAN}')
+        return False
+    if spread > CONVERGENCE_MAX_SPREAD:
+        log(
+            f'latest score convergence not proven: '
+            f'spread {spread:.1f} > {CONVERGENCE_MAX_SPREAD}'
+        )
+        return False
+    return True
+
+
 def snapshot(label: str) -> None:
     p = subprocess.run(
         ['python3', str(ROOT / 'scripts' / 'snapshot_orbit_status.py')],
@@ -121,6 +206,9 @@ def main() -> int:
             if gap < MIN_SUBMIT_GAP:
                 log(f'{name}: last submission was {gap} ago, below {MIN_SUBMIT_GAP}; aborting')
                 return 1
+            if not score_has_converged(str(latest.ref), score_float(latest.public_score)):
+                log(f'{name}: latest submission score is not converged; aborting')
+                return 1
 
         latest2 = rows[:2]
         for idx, row in enumerate(latest2, start=1):
@@ -132,7 +220,7 @@ def main() -> int:
                 log(f'{name}: latest{idx} is pending; aborting to preserve latest-2 evaluation')
                 return 1
 
-        if name == 'producer_ffa_guard':
+        if name in {'producer_ffa_guard', 'h19_s14t14_2ponly'}:
             producer_rows = [
                 row for row in latest2
                 if row.file_name == 'slawek_producer_v2_20260613.tar.gz'

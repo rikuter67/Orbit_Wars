@@ -420,6 +420,15 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - That is not Live-safe because h19-like clones are expected and the h19 loss rate is too high.
 - Decision: do not implement another initial-map gate for `nonmine075`. The available initial features do not separate h19-like losses from Producer/oldv2 wins well enough.
 
+### 2026-06-16 17:47-18:25 JST (mapgate floor recheck, no submit)
+
+- Rechecked prior promising initial-map Producer fallback variants on the hostile `127-130` seed band:
+  - `logs/local_eval_20260616/mapgate_floor_recheck_seed127_130.json`
+  - `lowfast80_floor20`: h19 `2-6`, Producer `1-5-2`, oldv2 `4-4`.
+  - `lowfast80_floor50`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
+  - `margin18_floor20`: h19 `3-1-4`, Producer `5-3`, oldv2 `0-8`.
+- Decision: do not submit. `margin18_floor20` is the best-looking h19/Producer result in this recheck, but the oldv2 `0-8` collapse is too severe. Since oldv2-like public code is a plausible live opponent family, this cannot replace current h19.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

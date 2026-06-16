@@ -1,8 +1,8 @@
-# Orbit Wars Snapshot 20260616_203104
+# Orbit Wars スナップショット 20260616_203104
 
-## Submissions
+## 提出一覧
 
-| ref | file | date | description | status | score | error |
+| ref | ファイル | 日時 | 説明 | 状態 | スコア | エラー |
 |---|---|---|---|---|---:|---|
 | 53734299 | `highfast85_producer_gate_20260616.tar.gz` | 2026-06-16 06:47:18.547000 | H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616 | SubmissionStatus.COMPLETE | 1263.3 |  |
 | 53721805 | `submission.tar.gz` | 2026-06-15 19:58:44 |  | SubmissionStatus.COMPLETE | 1055.0 |  |
@@ -17,23 +17,23 @@
 | 53551430 | `kuni_lb1240_clean.tar.gz` | 2026-06-11 00:22:02.743000 | final recover kuni prior 1070 after failed postreset | SubmissionStatus.COMPLETE | 1148.4 |  |
 | 53551362 | `raunak_adaptive_clean.tar.gz` | 2026-06-11 00:18:24 | recover raunak prior active after failed postreset | SubmissionStatus.COMPLETE | 1125.2 |  |
 
-## Leaderboard Download
+## リーダーボード取得結果
 
 ```text
 
 ```
 
-## Team Rank
+## チーム順位
 
-- rank: 121/4591 (2.64%)
-- score: 1263.3
-- submissionDate: 2026-06-16 06:47:18
+- 順位: 121/4591 (2.64%)
+- スコア: 1263.3
+- 提出日時: 2026-06-16 06:47:18
 
-## Cut Lines
+## カットライン
 
-- top 1%: rank 45, score 1390.6, team sash
-- top 2%: rank 91, score 1301.9, team Mathurin Ache
-- top 3%: rank 137, score 1256.1, team musculer
-- top 5%: rank 229, score 1228.2, team yuji y
-- top 10%: rank 459, score 1183.1, team surumenDD
-- top 20%: rank 918, score 1090.2, team Sijin Yu
+- 上位1% rank 45, スコア 1390.6, チーム sash
+- 上位2% rank 91, スコア 1301.9, チーム Mathurin Ache
+- 上位3% rank 137, スコア 1256.1, チーム musculer
+- 上位5% rank 229, スコア 1228.2, チーム yuji y
+- 上位10% rank 459, スコア 1183.1, チーム surumenDD
+- 上位20% rank 918, スコア 1090.2, チーム Sijin Yu

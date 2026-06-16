@@ -1,8 +1,8 @@
-# Orbit Wars Snapshot 20260616_160524
+# Orbit Wars スナップショット 20260616_160524
 
-## Submissions
+## 提出一覧
 
-| ref | file | date | description | status | score | error |
+| ref | ファイル | 日時 | 説明 | 状態 | スコア | エラー |
 |---|---|---|---|---|---:|---|
 | 53734299 | `highfast85_producer_gate_20260616.tar.gz` | 2026-06-16 06:47:18.547000 | H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616 | SubmissionStatus.COMPLETE | 823.5 |  |
 | 53714957 | `h19_s14t14_2ponly_producer4p_20260614.tar.gz` | 2026-06-15 14:56:00 | ProducerV2 2P-only variant | H19 ROI1.6 beta2.4 S14T14 | 2P 7-1 vs Producer seeds69-72 | pool Kuni5-3 Carbon5-3 oldv26-2 | 4P top2 16/16 exact Producer | 20260614 | SubmissionStatus.COMPLETE | 1241.9 |  |
@@ -17,23 +17,23 @@
 | 53551246 | `carbon_top1_fork_output.tar.gz` | 2026-06-11 00:14:19.433000 | recover carbon known 1155 after failed mid/v2 | SubmissionStatus.COMPLETE | 893.6 |  |
 | 53551022 | `exp48_2p_regroup_4p_original.tar.gz` | 2026-06-11 00:06:22.563000 | restore best known v2 emergency submit | SubmissionStatus.COMPLETE | 937.9 |  |
 
-## Leaderboard Download
+## リーダーボード取得結果
 
 ```text
 
 ```
 
-## Team Rank
+## チーム順位
 
-- rank: 161/4569 (3.52%)
-- score: 1241.9
-- submissionDate: 2026-06-16 06:47:18
+- 順位: 161/4569 (3.52%)
+- スコア: 1241.9
+- 提出日時: 2026-06-16 06:47:18
 
-## Cut Lines
+## カットライン
 
-- top 1%: rank 45, score 1391.0, team Radek Osmulski
-- top 2%: rank 91, score 1291.4, team Akarsh kumar shukla
-- top 3%: rank 137, score 1253.6, team Lucky
-- top 5%: rank 228, score 1224.2, team BeeMax
-- top 10%: rank 456, score 1181.2, team Troy_xx
-- top 20%: rank 913, score 1092.2, team Clark Kitchen
+- 上位1% rank 45, スコア 1391.0, チーム Radek Osmulski
+- 上位2% rank 91, スコア 1291.4, チーム Akarsh kumar shukla
+- 上位3% rank 137, スコア 1253.6, チーム Lucky
+- 上位5% rank 228, スコア 1224.2, チーム BeeMax
+- 上位10% rank 456, スコア 1181.2, チーム Troy_xx
+- 上位20% rank 913, スコア 1092.2, チーム Clark Kitchen

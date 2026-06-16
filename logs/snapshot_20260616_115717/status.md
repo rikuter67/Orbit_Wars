@@ -1,8 +1,8 @@
-# Orbit Wars Snapshot 20260616_115717
+# Orbit Wars スナップショット 20260616_115717
 
-## Submissions
+## 提出一覧
 
-| ref | file | date | description | status | score | error |
+| ref | ファイル | 日時 | 説明 | 状態 | スコア | エラー |
 |---|---|---|---|---|---:|---|
 | 53714957 | `h19_s14t14_2ponly_producer4p_20260614.tar.gz` | 2026-06-15 14:56:00 | ProducerV2 2P-only variant | H19 ROI1.6 beta2.4 S14T14 | 2P 7-1 vs Producer seeds69-72 | pool Kuni5-3 Carbon5-3 oldv26-2 | 4P top2 16/16 exact Producer | 20260614 | SubmissionStatus.COMPLETE | 1227.5 |  |
 | 53658218 | `slawek_producer_v2_20260613.tar.gz` | 2026-06-14 03:44:49.463000 | cautious latest2 producer_v2 safety refresh 20260614 | SubmissionStatus.COMPLETE | 1191.4 |  |
@@ -17,23 +17,23 @@
 | 53551022 | `exp48_2p_regroup_4p_original.tar.gz` | 2026-06-11 00:06:22.563000 | restore best known v2 emergency submit | SubmissionStatus.COMPLETE | 937.9 |  |
 | 53550766 | `v2_regroup_mid.tar.gz` | 2026-06-11 00:00:09.943000 | v2 regroup mid emergency submit | SubmissionStatus.COMPLETE | 916.9 |  |
 
-## Leaderboard Download
+## リーダーボード取得結果
 
 ```text
 
 ```
 
-## Team Rank
+## チーム順位
 
-- rank: 214/4552 (4.70%)
-- score: 1227.5
-- submissionDate: 2026-06-15 14:56:00
+- 順位: 214/4552 (4.70%)
+- スコア: 1227.5
+- 提出日時: 2026-06-15 14:56:00
 
-## Cut Lines
+## カットライン
 
-- top 1%: rank 45, score 1387.0, team 준환
-- top 2%: rank 91, score 1289.1, team Michael Long
-- top 3%: rank 136, score 1254.4, team sary sary
-- top 5%: rank 227, score 1224.1, team Naoism
-- top 10%: rank 455, score 1181.9, team Hayato Matsuzawa
-- top 20%: rank 910, score 1092.5, team Dinesh kumar Thiyagarajan
+- 上位1% rank 45, スコア 1387.0, チーム 준환
+- 上位2% rank 91, スコア 1289.1, チーム Michael Long
+- 上位3% rank 136, スコア 1254.4, チーム sary sary
+- 上位5% rank 227, スコア 1224.1, チーム Naoism
+- 上位10% rank 455, スコア 1181.9, チーム Hayato Matsuzawa
+- 上位20% rank 910, スコア 1092.5, チーム Dinesh kumar Thiyagarajan

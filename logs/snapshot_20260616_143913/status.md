@@ -1,8 +1,8 @@
-# Orbit Wars Snapshot 20260616_143913
+# Orbit Wars スナップショット 20260616_143913
 
-## Submissions
+## 提出一覧
 
-| ref | file | date | description | status | score | error |
+| ref | ファイル | 日時 | 説明 | 状態 | スコア | エラー |
 |---|---|---|---|---|---:|---|
 | 53714957 | `h19_s14t14_2ponly_producer4p_20260614.tar.gz` | 2026-06-15 14:56:00 | ProducerV2 2P-only variant | H19 ROI1.6 beta2.4 S14T14 | 2P 7-1 vs Producer seeds69-72 | pool Kuni5-3 Carbon5-3 oldv26-2 | 4P top2 16/16 exact Producer | 20260614 | SubmissionStatus.COMPLETE | 1241.9 |  |
 | 53658218 | `slawek_producer_v2_20260613.tar.gz` | 2026-06-14 03:44:49.463000 | cautious latest2 producer_v2 safety refresh 20260614 | SubmissionStatus.COMPLETE | 1191.6 |  |
@@ -17,23 +17,23 @@
 | 53551022 | `exp48_2p_regroup_4p_original.tar.gz` | 2026-06-11 00:06:22.563000 | restore best known v2 emergency submit | SubmissionStatus.COMPLETE | 937.9 |  |
 | 53550766 | `v2_regroup_mid.tar.gz` | 2026-06-11 00:00:09.943000 | v2 regroup mid emergency submit | SubmissionStatus.COMPLETE | 916.9 |  |
 
-## Leaderboard Download
+## リーダーボード取得結果
 
 ```text
 
 ```
 
-## Team Rank
+## チーム順位
 
-- rank: 162/4564 (3.55%)
-- score: 1241.9
-- submissionDate: 2026-06-15 14:56:00
+- 順位: 162/4564 (3.55%)
+- スコア: 1241.9
+- 提出日時: 2026-06-15 14:56:00
 
-## Cut Lines
+## カットライン
 
-- top 1%: rank 45, score 1389.1, team DONJYARAHOI
-- top 2%: rank 91, score 1292.9, team linrock
-- top 3%: rank 136, score 1253.8, team Masashi Nishimoto
-- top 5%: rank 228, score 1223.4, team Alyce Miki
-- top 10%: rank 456, score 1181.3, team Michael Pershin
-- top 20%: rank 912, score 1092.4, team Tarun Rai
+- 上位1% rank 45, スコア 1389.1, チーム DONJYARAHOI
+- 上位2% rank 91, スコア 1292.9, チーム linrock
+- 上位3% rank 136, スコア 1253.8, チーム Masashi Nishimoto
+- 上位5% rank 228, スコア 1223.4, チーム Alyce Miki
+- 上位10% rank 456, スコア 1181.3, チーム Michael Pershin
+- 上位20% rank 912, スコア 1092.4, チーム Tarun Rai

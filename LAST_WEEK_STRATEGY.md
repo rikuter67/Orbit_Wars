@@ -1,55 +1,58 @@
-# Orbit Wars Last Week Strategy
+# Orbit Wars 最終週戦略
 
-Timestamp: 2026-06-14 01:05 JST
+タイムスタンプ: 2026-06-14 01:05 JST
 
-## Current Decision
+## 現在の判断
 
-Do not submit a new experimental variant before the 08:30 target.
+08:30 の狙い手前では、新しい実験版を提出しない。
 
-The safest validated 08:30 plan is to keep the latest two submissions as Producer-family rows. The current automation does this with guarded Producer refreshes at 02:00, 05:05, and 08:25 JST, with audits around each action. The guard refuses to submit if the latest row is too recent or either latest-two row is pending.
+08:30 に最も安全と判断された運用は、最新2件を Producer 系で維持することです。現在の自動化はこの方針を前提に、02:00・05:05・08:25 JST で Producer のガード付き再提出を行い、各実行の前後で監査を実施しています。直近の最新行が新しすぎる場合、または latest2 が pending の場合は提出をブロックします。
 
-## Evidence
+## 根拠
 
-- Latest live safety row: `slawek_producer_v2_20260613.tar.gz`, ref `53634763`, score `1191.2` at the 01:01 snapshot.
-- Reyhan `20勝0敗` was submitted as requested: ref `53640054`, description includes `20勝0敗`, but current score is only `1042.1`.
-- The old `exp48_2p_regroup_4p_original.tar.gz` row reached `1329.7` historically, but its later restore submission scored only `937.9`, so it is not reliable enough to anchor current latest-two strategy.
-- `producer_ffa_guard` was initially promising, but additional validation reversed it:
-  - 2P extra check: `3-5` vs Producer.
-  - 4P extra check: same top2 as Producer but wins `6/24` vs Producer `12/24`.
-- The 2026-06-14 Producer-neighborhood grid did not find a submit-worthy replacement:
-  - `h18_roi13_beta18`: combined 2P `6-6` vs Producer across seeds 40-45.
-  - `h16_roi14_beta20`: combined 2P `6-6` vs Producer across seeds 40-45.
-  - 4P same-seed check: both variants top2 `12/12`, wins `5/12`; Producer top2 `12/12`, wins `6/12`.
+## 根拠
 
-## Final-Week Direction
+- 最新の live 安全候補: `slawek_producer_v2_20260613.tar.gz`（ref `53634763`）  
+  スナップショット 01:01 時点で `1191.2`。
+- Reyhan の `20勝0敗` は依頼どおり提出済み（ref `53640054`）。コメントにも `20勝0敗` を残しているが、現時点のスコアは `1042.1`。
+- 旧版 `exp48_2p_regroup_4p_original.tar.gz` は過去に `1329.7` を出したが、後の復元提出は `937.9` に落ちたため、現行の latest-two 運用の土台にはしない。
+- `producer_ffa_guard` は初期検証では有望だったが、追加検証で逆転。
+  - 2P追加検証: Producer に対し `3-5`
+  - 4P追加検証: Producer と top2 は同等だが、勝率は `6/24`（Producer `12/24`）
+- 2026-06-14 の Producer 近傍グリッドでは、提出する価値のある置換が取れなかった。
+  - `h18_roi13_beta18`: 2P が seed 40-45 で Producer に対し合計 `6-6`
+  - `h16_roi14_beta20`: 2P が seed 40-45 で Producer に対し合計 `6-6`
+  - 4P同一シード検証: 両候補とも top2 `12/12`、勝ちは `5/12`、Producer は `6/12`
 
-Primary direction: Producer V2 as the base, unchanged Producer 4P, and a gated 2P-only aggression branch.
+## 最終週の方向性
 
-The only local signal that still looks useful is lower ROI / lower reinforcement-beta aggression in 2P. It improves or holds up against several public baselines, but it has not beaten Producer itself. This should be explored as a conditional branch, not as a full replacement.
+基本方針は「Producer V2 をベースに固定し、4P は既存 Producer を維持したまま、2P のみ条件付きで攻撃性を試す」です。
 
-Team-shared operating policy as of 2026-06-14:
+2P で残っている有望なシグナルは「ROI と reinforcement-beta を下げること（より攻撃的）」です。複数の公共基準には有効でも Producer 本体を安定して上回っておらず、全置換ではなく「条件付き分岐」の実験として扱うべきです。
 
-- Treat `slawekbiel/the-producer-v2` as the stable baseline. Its live rows have converged around the high-1100s, while many local/public hybrids looked good briefly and then collapsed.
-- Understand Producer first, then make many small Producer-family changes rather than large rewrites.
-- Filter variants locally, but submit to Live one at a time and observe convergence before the next move.
-- Optimize 2P and 4P separately: 2P can justify controlled aggression; 4P should preserve Producer's cautious top2 consistency.
-- Because nearby ranks likely contain similar public-code families, direct improvement must include beating Producer/self-like agents, not only older public baselines.
+チーム方針（2026-06-14）:
 
-## Work Order
+- `slawekbiel/the-producer-v2` を安定基準として扱う。ライブ実績は概ね高1100帯に収束しており、局所的に強く見えた多くの公開/ハイブリッドは途中で崩れる傾向がある。
+- 最初に Producer を理解する。大規模な書き換えより、小さな Producer 系の変更を大量に試す。
+- 変種はローカルで先にふるい落とし、Live には 1 つずつ提出して収束を確認してから次に進む。
+- 2P と 4P は別扱いで最適化する。2P は制御可能な攻勢を許容し、4P は Producer の慎重な top2 安定性を維持する。
+- 近接帯には Producer 系クローンや類似系が混在しやすいので、勝ち筋は Producer/自己類似相手への優位性が必要。古い公開基準に対してだけ強いだけでは不十分。
 
-1. Preserve latest-two safety with Producer refreshes.
-2. Build 2P-only routed variants that leave 4P exactly equal to Producer.
-3. Run larger 2P validation against Producer, Kuni, oldv2, Reyhan, and the public candidate pool.
-4. Add map-feature routing only if one variant wins on a clear subset of maps and does not degrade the rest.
-5. Submit only if the candidate beats Producer directly by a meaningful margin and keeps 4P top2/win metrics at least equal.
+## 作業順
 
-## Submission Gate
+1. Producer の再提出を維持し、latest2 の安全性を保つ。
+2. 4P は Producer と完全一致、2P だけ切り替え可能な分岐型候補を作る。
+3. Producer・Kuni・oldv2・Reyhan・公開候補群を含む 2P の広め評価を行う。
+4. 初期マップ特徴で分岐を入れるなら、明確に勝てる地図集合があり、他地図を劣化させないものだけ採用する。
+5. Producer 直接対戦で十分な勝差を取れ、かつ 4P の top2・勝率が Producer 以下に悪化しない候補のみ提出する。
 
-A new candidate should not be submitted unless it satisfies all of:
+## 提出ゲート
 
-- Latest-two safety row is Producer and complete.
-- No pending submissions.
-- At least 3 hours since the previous submit.
-- 2P direct vs Producer wins by a clear margin on a broader seed set.
-- 4P top2 is not below Producer and win count is not meaningfully worse.
-- Submission comment includes the exact local evidence summary.
+新規候補は次をすべて満たしてから提出する。
+
+- latest2 の2件が Producer 系で、かつ完了扱いであること。
+- pending 行がないこと。
+- 前回提出から3時間以上あけること。
+- 2P の Producer 直接対戦がより広い seed セットで明確に勝っていること。
+- 4P top2 が Producer を下回らず、勝数も有意に悪化していないこと。
+- 提出コメントにローカル検証の要約を正しく入れること。

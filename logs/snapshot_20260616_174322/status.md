@@ -1,8 +1,8 @@
-# Orbit Wars Snapshot 20260616_174322
+# Orbit Wars スナップショット 20260616_174322
 
-## Submissions
+## 提出一覧
 
-| ref | file | date | description | status | score | error |
+| ref | ファイル | 日時 | 説明 | 状態 | スコア | エラー |
 |---|---|---|---|---|---:|---|
 | 53734299 | `highfast85_producer_gate_20260616.tar.gz` | 2026-06-16 06:47:18.547000 | H19 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616 | SubmissionStatus.COMPLETE | 1210.4 |  |
 | 53714957 | `h19_s14t14_2ponly_producer4p_20260614.tar.gz` | 2026-06-15 14:56:00 | ProducerV2 2P-only variant | H19 ROI1.6 beta2.4 S14T14 | 2P 7-1 vs Producer seeds69-72 | pool Kuni5-3 Carbon5-3 oldv26-2 | 4P top2 16/16 exact Producer | 20260614 | SubmissionStatus.COMPLETE | 1240.5 |  |
@@ -17,23 +17,23 @@
 | 53551246 | `carbon_top1_fork_output.tar.gz` | 2026-06-11 00:14:19.433000 | recover carbon known 1155 after failed mid/v2 | SubmissionStatus.COMPLETE | 893.6 |  |
 | 53551022 | `exp48_2p_regroup_4p_original.tar.gz` | 2026-06-11 00:06:22.563000 | restore best known v2 emergency submit | SubmissionStatus.COMPLETE | 937.9 |  |
 
-## Leaderboard Download
+## リーダーボード取得結果
 
 ```text
 
 ```
 
-## Team Rank
+## チーム順位
 
-- rank: 176/4582 (3.84%)
-- score: 1240.5
-- submissionDate: 2026-06-16 06:47:18
+- 順位: 176/4582 (3.84%)
+- スコア: 1240.5
+- 提出日時: 2026-06-16 06:47:18
 
-## Cut Lines
+## カットライン
 
-- top 1%: rank 45, score 1398.4, team sash
-- top 2%: rank 91, score 1297.7, team ShumingFang
-- top 3%: rank 137, score 1255.9, team Masashi Nishimoto
-- top 5%: rank 229, score 1225.7, team Beyond Logic
-- top 10%: rank 458, score 1184.6, team 新米エンジニア十一号
-- top 20%: rank 916, score 1091.0, team LinearBasis
+- 上位1% rank 45, スコア 1398.4, チーム sash
+- 上位2% rank 91, スコア 1297.7, チーム ShumingFang
+- 上位3% rank 137, スコア 1255.9, チーム Masashi Nishimoto
+- 上位5% rank 229, スコア 1225.7, チーム Beyond Logic
+- 上位10% rank 458, スコア 1184.6, チーム 新米エンジニア十一号
+- 上位20% rank 916, スコア 1091.0, チーム LinearBasis

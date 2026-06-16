@@ -364,6 +364,13 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - h19 convergence samples: `04:55=1235.0`, `06:20=1233.9`, `10:28=1227.5`; span `5:32`, spread `7.5`.
   - Producer convergence samples: `04:55=1200.1`, `06:20=1193.3`, `10:28=1187.7`; span `5:32`, spread `12.4`.
   - Live state is converged enough for a future submit gate, but no submit was made from this check.
+- Follow-up eval, still no submit:
+  - `logs/local_eval_20260616/h19_h20_4p_ffa_seed77_80.json`
+  - `h19_h20_4p`: top2 `16/16`, wins `6/16`.
+  - `h19`: top2 `15/16`, wins `9/16`.
+  - `logs/local_eval_20260616/h19_h20_4p_2p_pool_seed131_132.json`
+  - vs h19 `2-2`, vs Producer `4-0`, vs oldv2 `4-0`, vs Kuni `2-2`, vs Carbon `2-2`.
+  - Final decision for this candidate: do not submit. Across 4P seeds `69-80`, the mixed candidate is top2-stable (`48/48`) but only wins `23/48`; h19 wins `22/48` with one top2 miss. That is not enough upside to spend a Live submission, especially because h19 currently has a stable score above the top5 cut.
 
 ### 2026-06-14 13:58 (selection review)
 

@@ -1,0 +1,614 @@
+[
+  {
+    "candidate": "h19_h20_4p",
+    "ffa": {
+      "errors": 0,
+      "losses": 0,
+      "rows": [
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 78,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 78,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            -1,
+            1
+          ],
+          "seed": 78,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 78,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        }
+      ],
+      "top2": 16,
+      "wins": 6
+    },
+    "path": "candidate_builds/h19_h20_4p_20260616/h19_2p_h20_4p/main.py",
+    "seeds": [
+      77,
+      78,
+      79,
+      80
+    ]
+  },
+  {
+    "candidate": "h19",
+    "ffa": {
+      "errors": 0,
+      "losses": 1,
+      "rows": [
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 77,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 78,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 78,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 78,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            -1,
+            1
+          ],
+          "seed": 78,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 3,
+          "rewards": [
+            -1,
+            1,
+            1,
+            -1
+          ],
+          "seed": 79,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 0,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 1,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": 1,
+          "rank": 1,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 2,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        },
+        {
+          "candidate": -1,
+          "rank": 2,
+          "rewards": [
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "seed": 80,
+          "slot": 3,
+          "statuses": [
+            "DONE",
+            "DONE",
+            "DONE",
+            "DONE"
+          ]
+        }
+      ],
+      "top2": 15,
+      "wins": 9
+    },
+    "path": "candidate_builds/producer_grid_20260614/h19_roi16_beta24_s14t14_2ponly/main.py",
+    "seeds": [
+      77,
+      78,
+      79,
+      80
+    ]
+  }
+]

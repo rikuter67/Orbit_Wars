@@ -79,7 +79,7 @@ xychart-beta
 5. 新規提出は原則 `scripts/cautious_submit_orbit.py` 経由にする。このスクリプトは3時間間隔、latest2 保留中、score収束を提出前にブロックする。
 6. 提出後にKaggle ref、スコア、snapshot、次の判断を追記する。
 
-以下は時系列の生ログです。古い行には当時の判断がそのまま残っています。現在のルールは [LAST_WEEK_STRATEGY.md](/mnt/c/Users/rikuter/kaggle/Orbit_Wars_git/LAST_WEEK_STRATEGY.md) を優先します。
+以下は時系列の生ログです。古い行には当時の判断がそのまま残っています。現在のルールは本ドキュメント（この `SUBMISSION_LOG.md`）の最新方針を優先します。
 
 ## 06:20以降の実験サマリ（読みやすい版）
 

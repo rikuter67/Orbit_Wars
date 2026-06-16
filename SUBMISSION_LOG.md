@@ -403,6 +403,11 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `avoid18`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
   - `strict4avoid18`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
 - Decision: do not submit. Removing the attack bonus makes the modifier safer versus h19, but it still preserves the oldv2 collapse and adds runtime cost while giving no Producer edge over h19. This softmod family is useful only as a h19/self-like stabilizer, not as a gold-push candidate.
+- 2026-06-16 11:06 JST live snapshot saved at `logs/snapshot_20260616_110614/status.md`:
+  - latest1 h19 ref `53714957` complete, score `1227.5`, rank `214/4552`.
+  - latest2 Producer ref `53658218` complete, score `1191.4`.
+  - top5 cut `1223.2`, top3 cut `1251.3`, top2 cut `1290.9`.
+  - No submission was made. Current h19 remains above the top5 cut, and no local candidate from this batch clears the submit gate.
 
 ### 2026-06-14 13:58 (selection review)
 

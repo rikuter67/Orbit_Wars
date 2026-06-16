@@ -217,18 +217,59 @@ kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20
 
 ---
 
-## 3) リポジトリ構成（最低限）
+## 3) リポジトリ構成（木構造）
 
-| パス | 内容 |
-|---|---|
-| `main.py` | ローカル起動用のエントリ（単体提出に使う最短版） |
-| `candidate_builds/` | 候補実装の実験保存先 |
-| `submissions/` | アーカイブ `*.tar.gz` |
-| `logs/` | スナップショット、seed評価結果、差分結果 |
-| `scripts/` | 評価・安全送信・ログ取得・提出監視 |
-| `SUBMISSION_LOG.md` | 全提出の詳細ログ（履歴の正本） |
-| `README.md` | 参照資料（規則・用語・実行コマンド） |
-| `ORBIT_WARS_GLOSSARY.md` | 用語辞書（Producer/Kuni/oldv2 等） |
+```text
+Orbit_Wars/
+├─ README.md
+│  └─ 運用ルール、最短再現手順、提出手順（これが読む第一資料）
+├─ SUBMISSION_LOG.md
+│  └─ 全提出の詳細履歴（差分・判定理由）
+├─ ORBIT_WARS_GLOSSARY.md
+│  └─ Producer / oldv2 / Kuni など用語の意味
+├─ candidate_builds/
+│  ├─ h19_highfast_producer_gate_20260616/highfast85/
+│  │  ├─ main.py
+│  │  │  └─ 採用版エージェント本体
+│  │  └─ orbit_lite/
+│  │     └─ 高速化・経路計算・行動選択ロジック
+│  └─ ※他実験版の候補（比較・再現材料）
+├─ scripts/
+│  ├─ orbit_path_eval_isolated.py
+│  │  └─ 2P/4Pを固定seedで再現比較する最重要評価スクリプト
+│  ├─ cautious_submit_orbit.py
+│  │  └─ pending/時間間隔を確認して提出する安全ゲート
+│  ├─ post_submit_audit_orbit.py
+│  │  └─ 提出後の整合チェックの簡易監査
+│  ├─ convergence_report_orbit.py
+│  │  └─ live収束の判定補助
+│  ├─ snapshot_orbit_status.py
+│  │  └─ 提出直前の状態ファイル作成
+│  ├─ trace_orbit_actions.py / trace_orbit_game.py
+│  │  └─ ゲーム行動と対局トレース解析
+│  └─ その他: orbit_batch_eval.py, restore_readiness_orbit.py, next_orbit_monitor_time.py
+│     └─ バッチ評価、提出準備、監視・補助用
+├─ submissions/
+│  ├─ highfast85_producer_gate_20260616.tar.gz
+│  │  └─ Kaggle提出用の現行採用版（現場提出物）
+│  ├─ slawek_producer_v2_20260613.tar.gz
+│  │  └─ 比較相手（producer系ベンチ）
+│  └─ その他: 過去提出 tar.gz（比較実験履歴）
+├─ logs/
+│  ├─ local_eval_YYYYMMDD/*.json
+│  │  └─ ローカル再現結果
+│  ├─ snapshot_YYYYMMDD_*/status.md
+│  │  └─ 提出時の状態記録（時間、top、submission名など）
+│  └─ その他のCSV/JSON
+│     └─ 特徴量・比較ログ（再現検証の材料）
+├─ producer_live_source/
+│  └─ 参照用の producer 本体（ベースライン比較）
+└─ experiments/
+   └─ 試験版実装置き場（最終提出前の試行ログ）
+```
+
+この木を読むだけで、見たい情報がどこにあるか追えます。
+（本版で再現運用に必須なのは `README.md`、`SUBMISSION_LOG.md`、`scripts/`、`candidate_builds/.../highfast85/`、`submissions/`、`logs/`）
 
 ---
 

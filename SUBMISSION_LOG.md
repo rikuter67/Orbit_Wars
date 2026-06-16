@@ -409,6 +409,17 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - top5 cut `1223.2`, top3 cut `1251.3`, top2 cut `1290.9`.
   - No submission was made. Current h19 remains above the top5 cut, and no local candidate from this batch clears the submit gate.
 
+### 2026-06-16 17:46 JST (nonmine075 gate review, no submit)
+
+- Rechecked existing feature CSVs for `nonmine075` and `h19params_multisize`:
+  - `logs/local_eval_20260616/nonmine075_features_seed127_134_clean.csv`
+  - `logs/local_eval_20260616/h19params_multisize_features_seed127_134_clean.csv`
+- Brute-forced simple one- and two-condition gates over `best_fast_value`, `my_fast_count`, `enemy_fast_count`, and `avg_abs_margin_top5`.
+- Best-looking gates still apply `nonmine075` to many h19-loss rows:
+  - Example: `best_fast_value >= 4` and `my_fast_count <= 4` gives h19 `4-10`, Producer `12-2`, oldv2 `10-4`, Kuni/Carbon `7-0`.
+  - That is not Live-safe because h19-like clones are expected and the h19 loss rate is too high.
+- Decision: do not implement another initial-map gate for `nonmine075`. The available initial features do not separate h19-like losses from Producer/oldv2 wins well enough.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

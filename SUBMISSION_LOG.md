@@ -429,6 +429,22 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `margin18_floor20`: h19 `3-1-4`, Producer `5-3`, oldv2 `0-8`.
 - Decision: do not submit. `margin18_floor20` is the best-looking h19/Producer result in this recheck, but the oldv2 `0-8` collapse is too severe. Since oldv2-like public code is a plausible live opponent family, this cannot replace current h19.
 
+### 2026-06-16 18:26-18:55 JST (historical exp48/v2 recheck, no submit)
+
+- Re-extracted historical archives for direct local checks:
+  - `submissions/exp48_2p_regroup_4p_original.tar.gz` to `/tmp/orbit_exp48_restore`.
+  - `submissions/v2_regroup_mid.tar.gz` to `/tmp/orbit_v2_mid`.
+  - `py_compile` passed for both extracted `main.py` files.
+- Rechecked against current h19/Producer/oldv2 baselines:
+  - `logs/local_eval_20260616/exp48_v2_recheck_seed127_128.json`
+  - `exp48_restore`: h19 `4-0`, Producer `0-4`, oldv2 `0-0-4`.
+  - `v2_mid`: h19 `4-0`, Producer `0-4`, oldv2 `2-2`.
+  - `exp48_public`: h19 `0-4`, Producer `0-4`, oldv2 `2-2`.
+  - `logs/local_eval_20260616/exp48_v2_recheck_seed129_130.json`
+  - `exp48_restore`: h19 `4-0`, Producer `2-2`.
+  - `v2_mid`: h19 `2-2`, Producer `3-1`.
+- Decision: do not submit. The historical `exp48_restore`/`v2_mid` family is a real h19-like counter on some seeds, but it is too weak or unstable versus Producer (`exp48_restore` combined `2-6` vs Producer across `127-130`; `v2_mid` combined `3-5`). This matches the post-reset live collapse of the old v2 restore and is not safe while Producer clones remain common.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

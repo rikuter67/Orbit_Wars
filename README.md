@@ -36,9 +36,25 @@
 
 ---
 
-## 2) 再現フロー（最短5分）
+## 2) 再現フロー（最短5分）※現状最強版（highfast85）
 
-この順序で実行すると、現行採用版を短時間で再現できます。
+この順序で実行すると、現行採用版を短時間で同条件再現できます。
+
+### 2-0. 再現対象（現状最強版）
+
+再現すべき版:
+
+```text
+highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 |
+iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616
+```
+
+- 2P: `best_fast >= 85` のとき Producer へ切替
+- 4P: 4Pトップ2維持の既定挙動を維持
+- ファイル:
+  - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
+  - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
+  - `submissions/highfast85_producer_gate_20260616.tar.gz`
 
 ### 2-1. パッケージ
 
@@ -57,7 +73,8 @@ cd /path/to/repo/Orbit_Wars_git
 ### 2-3. 提出候補のアーカイブ（例: highfast85）
 
 ```bash
-tar -czf /tmp/highfast85_test.tar.gz main.py
+cd candidate_builds/h19_highfast_producer_gate_20260616/highfast85
+tar -czf ../../../submissions/highfast85_repro_pack_20260617.tar.gz main.py orbit_lite
 ```
 
 ### 2-4. ローカル単体対戦（再現最重要）
@@ -68,6 +85,12 @@ tar -czf /tmp/highfast85_test.tar.gz main.py
 - `py_compile`：構文や import エラーを最初に潰す。
 - 2P単体対戦：`Producer` に対する優位性（勝敗の傾向）が安定しているかを見る。
 - FFA補完対戦：`4P`で top2 が崩れやすい相手（Kuni / carbon / oldv2）へ影響がないか見る。
+
+再現順:
+
+1. まず `py_compile` で採用版本体を検証
+2. `submissions/` 版で2P・4Pを同一 seed で検証
+3. `candidate_builds/.../highfast85/` 版でも同一条件で再検証
 
 意図:
 
@@ -90,6 +113,20 @@ tar -czf /tmp/highfast85_test.tar.gz main.py
 python3 -m py_compile candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
 
 # 2P再現（Producer との直接比較）
+python3 scripts/orbit_path_eval_isolated.py \
+  --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
+  --opponent slawek=./submissions/slawek_producer_v2_20260613.tar.gz \
+  --seeds 127,128,129,130 \
+  --out logs/local_eval_20260617/highfast85_seed127_130.json
+
+# 4P補完チェック（top2崩れがないか）
+python3 scripts/orbit_path_eval_isolated.py \
+  --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
+  --ffa-opponents ./submissions/slawek_producer_v2_20260613.tar.gz,./submissions/kuni_lb1240_clean.tar.gz,./submissions/carbon_top1_fork_output.tar.gz \
+  --seeds 127,128 \
+  --out logs/local_eval_20260617/highfast85_ffa_seed127_128.json
+
+# まず tar 版で最低1回実行（提出直前の再現）
 python3 scripts/orbit_path_eval_isolated.py \
   --candidate highfast85=./submissions/highfast85_producer_gate_20260616.tar.gz \
   --opponent slawek=./submissions/slawek_producer_v2_20260613.tar.gz \
@@ -118,6 +155,13 @@ python3 scripts/orbit_path_eval_isolated.py \
 
 - 再現した seed 条件を壊さないため、コマンドは毎回同じ名前でログを保存しておく。
 - 失敗した場合は `scripts/cautious_submit_orbit.py` の条件（pending、3時間、latest2）を確認してから再試行する。
+
+採用時の提出準備（最低限）:
+
+```bash
+python3 scripts/cautious_submit_orbit.py highfast85
+python3 scripts/post_submit_audit_orbit.py
+```
 
 期待される出力:
 
@@ -154,6 +198,11 @@ kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20
   - 直近 100分以上
   - 3点以上のサンプル
   - `spread <= 35`
+- （収束補足）
+  - 最新100分以内に3点以上
+  - 時間幅が45分以上
+  - `score spread <= 35.0`
+  - latest2 no pending
 
 #### 2-6-d. 進行保護チェック
 
@@ -196,70 +245,6 @@ kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20
 
 ---
 
-## 5) 現状最強版の再現（highfast85）
-
-この節の目的は、いま採用している **highfast85 現状最強版** を、
-他の人が同じ条件で同じ挙動として再現できるようにすることです。
-
-再現すべき版:
-
-```text
-highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616
-```
-
-- 2P: `best_fast >= 85` の局面で Producer 方針へ切替
-- 4P: `top2` を守る既定版構成を維持（現行挙動優先）
-- 再現対象:
-  - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
-  - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
-  - `submissions/highfast85_producer_gate_20260616.tar.gz`
-
-### 5-1. 再現手順（同じ結果を出すための順番）
-
-1. 同じ Python 環境を作る。
-2. いま採用している `main.py` が壊れていないか確認。
-3. 2P/FFA の比較を、採用時と同じ seed 範囲で回して傾向を確認。
-4. 最後に snapshot を取って、提出時ログと比較できる状態にする。
-
-```bash
-cd /mnt/c/Users/rikuter/kaggle/Orbit_Wars_git
-python3 -m venv .venv-orbit311
-source .venv-orbit311/bin/activate  # Windows: .venv-orbit311\Scripts\Activate
-pip install --upgrade pip
-pip install "kaggle-environments>=1.28.0" kaggle
-
-python3 -m py_compile candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
-
-python3 scripts/orbit_path_eval_isolated.py \
-  --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
-  --opponent slawek=submissions/slawek_producer_v2_20260613.tar.gz \
-  --seeds 127,128,129,130 \
-  --out logs/local_eval_20260617/highfast85_seed127_130.json
-
-python3 scripts/orbit_path_eval_isolated.py \
-  --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
-  --ffa-opponents submissions/slawek_producer_v2_20260613.tar.gz,submissions/kuni_lb1240_clean.tar.gz,submissions/carbon_top1_fork_output.tar.gz \
-  --seeds 127,128 \
-  --out logs/local_eval_20260617/highfast85_ffa_seed127_128.json
-
-python3 scripts/snapshot_orbit_status.py
-```
-
-### 5-2. 収束判定の閾値
-
-- 最新100分以内に3点以上の記録
-- 時間幅が45分以上
-- score spread `<= 35.0`
-- latest2 no pending
-
-### 5-3. 提出準備（この状態でのみ）
-
-```bash
-python3 scripts/cautious_submit_orbit.py highfast85
-python3 scripts/post_submit_audit_orbit.py
-```
-
----
 
 ## 6) ログ運用とコメント規則
 

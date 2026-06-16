@@ -8,7 +8,7 @@ from pathlib import Path
 
 from kaggle.api.kaggle_api_extended import KaggleApi
 
-ROOT = Path('/mnt/c/Users/rikuter/kaggle/Orbit_Wars')
+ROOT = Path(__file__).resolve().parents[1]
 COMP = 'orbit-wars'
 JST = dt.timezone(dt.timedelta(hours=9))
 SUBMIT_LOCK = ROOT / 'logs' / 'submit.lock'

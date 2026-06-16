@@ -5,7 +5,7 @@ from pathlib import Path
 
 from kaggle.api.kaggle_api_extended import KaggleApi
 
-ROOT = Path('/mnt/c/Users/rikuter/kaggle/Orbit_Wars')
+ROOT = Path(__file__).resolve().parents[1]
 COMP = 'orbit-wars'
 JST = dt.timezone(dt.timedelta(hours=9))
 LOG = ROOT / 'logs' / 'post_submit_audit_orbit.log'

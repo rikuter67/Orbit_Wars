@@ -3,12 +3,13 @@ import csv
 import datetime as dt
 import subprocess
 import zipfile
+import shutil
 from pathlib import Path
 
 from kaggle.api.kaggle_api_extended import KaggleApi
 
-ROOT = Path('/mnt/c/Users/rikuter/kaggle/Orbit_Wars')
-KAGGLE = '/home/rikuter/.local/bin/kaggle'
+ROOT = Path(__file__).resolve().parents[1]
+KAGGLE = shutil.which("kaggle") or str(Path.home() / ".local" / "bin" / "kaggle")
 COMP = 'orbit-wars'
 JST = dt.timezone(dt.timedelta(hours=9))
 

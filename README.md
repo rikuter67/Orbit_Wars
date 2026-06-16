@@ -1,7 +1,7 @@
 # Orbit Wars 実験用ワークスペース（再現重視）
 
 このリポジトリは **Orbit Wars** 用の実験コードと提出管理を行う作業場です。  
-`git push` 可能な基準リポジトリとして、今後は **`/mnt/c/Users/rikuter/kaggle/Orbit_Wars_git`** を使います。
+ローカルの `git push` と提出準備は、このフォルダを起点に実行します。
 
 ## 優先対象（再現すべきもの）
 

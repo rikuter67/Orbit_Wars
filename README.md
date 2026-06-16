@@ -1,233 +1,200 @@
-# Orbit Wars 再現ガイド
+# Orbit Wars 再現ガイド（高再現性運用版）
 
-このガイドは、再現性を優先して運用し、同じ材料で同じ結果に到達できるようにするための実行手順です。
-
-ここだけ読めば、**どのファイルを見て、何をしたら再現できるか**を追えるように構成しています。
-
----
-
-## 1) まず押さえる前提
-
-- 対象: 現在運用中の `highfast85` 系。
-- 原則: 変更は小さい単位で行い、ローカル検証→収束確認→提出の順で進める。
-- 目的: 途中で判断基準がぶれないこと（再現性を守る）。
-
-この3点を最初に固定すると、のちの判断が揺れません。
-
-読む順序は固定です。
-
-- `LOG.md` : 現在の状態（何が採用候補か）。
-- `SUBMISSION_LOG.md` : 過去の判断理由。
-- `logs/` : 検証の生データ。
+この README は、同じ再現手順で同じ判断に到達できるように集約した運用ガイドです。
+提出を進める際はこの本文を最初に読む前提にしてください。
 
 ---
 
-## 2) リポジトリ構成（再現に必要な意味）
+## 1) 役割分担と現在の最重要状態（2026-06-16 21:16 JST 時点）
 
-### 2-1. 迷いを防ぐための固定ルール
+### 現状（Kaggle側）
 
-再現で見失いやすいのは「どこが正本でどこが履歴か」の線引きです。
-ここでは、運用で必ず使うものだけを優先し、補助資料は最後に置いています。
+- 現行採用候補: `highfast85_producer_gate_20260616.tar.gz`
+- 最新提出: `53734299`
+- スコア: `1269.5`
+- 順位: `109/4593 (2.37%)`
+- topライン:
+  - top2: `1296.2`
+  - top3: `1252.8`
+  - top5: `1224.3`
 
-### 2-2. 再現コア（毎回必読）
+### 直近方針
 
-| パス | 役割 | なぜ必要か |
-|---|---|---|
-| `README.md` | 再現手順、前提、コメント規則 | 入口を一つに固定するため |
-| `LOG.md` | 現在採用の状態、直近の数値 | 「今の正解」がどこかを素早く確認するため |
-| `SUBMISSION_LOG.md` | 全提出の意図・評価・採否 | 後から「なぜこの版を選んだか」を追跡するため |
+- `h19` 系の現状版が比較的安定（4P top2保持）
+- 新規アイデア（`trap`/`avoid`/`preempt` など）は、
+  **収束確認＋提出条件ゲートなしでの直接提出は見送る**
 
-### 2-3. 運用ルール理解（背景）
+### ファイルごとの役割（この版で運用）
 
-- `LAST_WEEK_STRATEGY.md` : 2P/4P 分岐と採用条件の最終ルール。なぜ top2 を守るのかがここで決まる。 
-- `ORBIT_WARS_GLOSSARY.md` : Producer, top2 cut などの用語統一。意味のズレを減らす。 
-- `RESEARCH_NOTES.md` : 試行・失敗を含めた探索履歴。過去の失敗を再現しないため。 
-- `CHECKPOINT_PRODUCER_1211_3.md` : 運用の節目。方針転換の根拠を残す。 
-- `MANUAL_RESTORE_STEPS.md` : 収束不調時の戻し手順。
+この運用では、`LOG.md` は補助扱いで、**実行判断の正本はこの README + SUBMISSION_LOG** です。
 
-### 2-4. 毎回触る実行領域（ここを理解すればほぼ運用可能）
-
-#### `scripts/`
-
-- `snapshot_orbit_status.py` : Kaggle状況を取り、収束ゲートの根拠を保存。
-- `cautious_submit_orbit.py` : 3条件（間隔・収束・pending）を守って提出を守る。
-- `post_submit_audit_orbit.py` : 送信直後の状態を確定させる。
-- `orbit_path_eval_isolated.py` / `orbit_path_eval.py` : ローカルで2P/4Pを比較し、seed依存を確認。
-- `orbit_batch_eval.py` : 複数候補を並列で同条件比較。
-
-#### `candidate_builds/`
-
-候補コードの正本はここです。再現時はこの形で固定します。
-
-- `candidate_builds/<テーマ>/<variant>/main.py`
-- `candidate_builds/<テーマ>/<variant>/orbit_lite/`
-
-現行対象: `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/`
-
-#### `logs/`
-
-- `snapshot_YYYYMMDD_HHMMSS/status.md` : live収束・pending・順位の時系列。
-- `local_eval_*.json` : ローカル対戦結果（2P/4P）と seed ごとの比較。
-
-#### `submissions/`
-
-- `submissions/<name>.tar.gz` : Kaggleへ出す提出成果物。
-- 再現比較では、**真実は候補コード**なので `candidate_builds` を正として読む。
-
-### 2-5. 補助
-
-- `experiments/` : 試作メモ。
-- `producer_live_source/` : 公開版の参照コピー。
+- `README.md`（ここ）: 手順・判断ルール・再現コマンドの正本
+- `SUBMISSION_LOG.md`: 全提出の全履歴（正確な根拠）
+- `logs/`: 収束・比較の証跡
+- `candidate_builds/`: 候補版ソース
+- `submissions/`: 提出物（`.tar.gz`）
 
 ---
 
-## 3) 採用版の再現（highfast85）
+## 2) 再現フロー（最短5分）
 
-### 3-0) 再現対象（提出コメント）
+この順序で実行すると、現行採用版を短時間で再現できます。
 
-このガイドで再現するのは、以下の提出コメントと一致する版です。
-
-`highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616`
-
-**判定ロジックの意味**
-
-- 2人戦: `best_fast >= 85` を越える局面で Producer 的な攻勢に切り替える。
-- 4人戦: 既存 h19 Producer4P を維持し、top2 落下を避ける。
-- 比較相手: `h19, Producer, oldv2, Kuni, Carbon` を固定条件で評価。
-- 対象データ: `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`。
-- 成果物: `submissions/highfast85_producer_gate_20260616.tar.gz`。
-
-### 3-1) 手法の要点
-
-- 2P は高速局面を取りこぼさないよう、閾値ベースで Producer 傾向を採用。
-- 4P は生存を優先し、top2 を守る既存設計を維持。
-- `Producer` を想定する公開相手が増える想定で、局面毎の極端な分岐は最小化。
-
-### 3-2) 再現に必要なファイル
-
-- `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
-- `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
-- `submissions/highfast85_producer_gate_20260616.tar.gz`
-- `scripts/cautious_submit_orbit.py` の `highfast85` エントリ
-
----
-
-## 4) 再現手順（実行フロー）
-
-この順番を守ると、再現結果がほぼ同じになります。
-
-### 4-1. 環境準備（なぜ必要？）
-
-同じ依存で走らせないと、同じコマンドでも結果がズレます。
+### 2-1. パッケージ
 
 ```bash
-cd /path/to/Orbit_Wars_git
-python -m venv .venv-orbit311
-source .venv-orbit311/bin/activate   # Windows: .venv-orbit311\Scripts\Activate
-pip install --upgrade pip
 pip install "kaggle-environments>=1.28.0" kaggle
 ```
 
-### 4-2. コード確認（なぜ必要？）
-
-手元の候補に設定が反映されていることを先に確認します。
+### 2-2. リポジトリ起点
 
 ```bash
-grep -n "best_fast" candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
-python3 -m py_compile candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
+cd /mnt/c/Users/rikuter/kaggle/Orbit_Wars_git
 ```
 
-### 4-3. ローカル評価（2P）
-
-まず 2P の改善を確認します。ここで最初に Producer への改善がないと先に進めません。
+### 2-3. 提出候補のアーカイブ（例: highfast85）
 
 ```bash
+tar -czf /tmp/highfast85_test.tar.gz main.py
+```
+
+### 2-4. ローカル単体対戦（再現最重要）
+
+```bash
+python3 scripts/orbit_path_eval_isolated.py \
+  --candidate candidate=./submissions/highfast85_producer_gate_20260616.tar.gz \
+  --opponent slawek=./submissions/slawek_producer_v2_20260613.tar.gz \
+  --seeds 127,128,129,130 \
+  --out logs/local_eval_20260616/example_check.json
+```
+
+### 2-5. 提出（候補を採用した場合）
+
+```bash
+kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20260616.tar.gz \
+  -m "highfast85_producer_gate_20260616 | 2P best_fast>=85 gate"
+```
+
+### 2-6. 提出前の最低チェック
+
+- `py_compile` 済み
+  - `python3 -m py_compile <candidate>/main.py`
+- 同一候補を2バッチ以上で同傾向確認
+  - 最低でも `--seeds 127-130` と別帯域
+- live スコア収束
+  - 直近 100分以上
+  - 3点以上のサンプル
+  - `spread <= 35`
+- latest2 が `pending` でないこと
+
+---
+
+## 3) リポジトリ構成（最低限）
+
+| パス | 内容 |
+|---|---|
+| `main.py` | ローカル起動用のエントリ（単体提出に使う最短版） |
+| `candidate_builds/` | 候補実装の実験保存先 |
+| `submissions/` | アーカイブ `*.tar.gz` |
+| `logs/` | スナップショット、seed評価結果、差分結果 |
+| `scripts/` | 評価・安全送信・ログ取得・提出監視 |
+| `SUBMISSION_LOG.md` | 全提出の詳細ログ（履歴の正本） |
+| `README.md` | 参照資料（規則・用語・実行コマンド） |
+| `ORBIT_WARS_GLOSSARY.md` | 用語辞書（Producer/Kuni/oldv2 等） |
+
+---
+
+## 4) 主要提出履歴（要点だけ）
+
+| 日時 (JST) | ref | コメント | スコア | 目的 |
+|---|---:|---|---:|---|
+| 2026-06-16 06:47 | `53734299` | `highfast85 Producer-gate` | `1269.5` | 現在採用候補。2P/4P のバランスと Producer 戦収束を確認 |
+| 2026-06-16 00:06 | `53714957` | `h19 2P-only variant` | `1230.8` | まず安定性を優先した生存ライン |
+| 2026-06-14 02:00 | `53645538` | `Producer V2 refresh` | `1217.2`（初期） | latest2安全基準を満たすための保険行 |
+| 2026-06-13 13:58 | `53634763` | `Producer V2安全行` | `1196.7` | Producer側のベースライン確保 |
+
+※本文字数を抑えるため、差分付き完全版は `SUBMISSION_LOG.md` を参照。
+
+---
+
+## 5) 採用版の再現（highfast85）
+
+以下の投稿コメントと一致する版を再現します。
+
+```text
+highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616
+```
+
+- 2P: `best_fast >= 85` の局面で Producer 方針へ切替
+- 4P: `top2` を守る既定版構成を維持（現行挙動優先）
+- 再現対象:
+  - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py`
+  - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
+  - `submissions/highfast85_producer_gate_20260616.tar.gz`
+
+### 5-1. ローカル再現手順（最短）
+
+```bash
+cd /mnt/c/Users/rikuter/kaggle/Orbit_Wars_git
+python3 -m venv .venv-orbit311
+source .venv-orbit311/bin/activate  # Windows: .venv-orbit311\Scripts\Activate
+pip install --upgrade pip
+pip install "kaggle-environments>=1.28.0" kaggle
+
+python3 -m py_compile candidate_builds/h19_highfast_producer_gate_20260616/highfast85/main.py
+
 python3 scripts/orbit_path_eval_isolated.py \
   --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
   --opponent slawek=submissions/slawek_producer_v2_20260613.tar.gz \
   --seeds 127,128,129,130 \
   --out logs/local_eval_20260617/highfast85_seed127_130.json
-```
 
-### 4-4. ローカル評価（4P）
-
-2Pだけでは不十分。4P の `top2` が落ちないかを確認してから採否判断に進みます。
-
-```bash
 python3 scripts/orbit_path_eval_isolated.py \
   --candidate highfast85=candidate_builds/h19_highfast_producer_gate_20260616/highfast85 \
   --ffa-opponents submissions/slawek_producer_v2_20260613.tar.gz,submissions/kuni_lb1240_clean.tar.gz,submissions/carbon_top1_fork_output.tar.gz \
   --seeds 127,128 \
   --out logs/local_eval_20260617/highfast85_ffa_seed127_128.json
-```
 
-### 4-5. 収束確認（なぜ必要？）
-
-live スコアは時間で揺れるため、短期サンプルだけで判断しません。
-
-```bash
 python3 scripts/snapshot_orbit_status.py
 ```
 
-確認ルール:
+### 5-2. 収束判定の閾値
 
-- 直近100分以内に3サンプル以上
-- 時間幅は最低45分以上
+- 最新100分以内に3点以上の記録
+- 時間幅が45分以上
 - score spread `<= 35.0`
-- latest2 に pending がない
+- latest2 no pending
 
-上記を満たさなければ提出しません。
-
----
-
-## 5) 実験記録の書き方（新規チューニング時）
-
-ここを毎回書くと、「なぜここを採用したか」を再現者に説明できます。
-
-### 5-1. 変更前に記録
-
-- 1方針1ファイルで作る（例: `exp/<内容>-<日付>`）。
-- 記録する5点:
-  - 意図（狙う相手・局面）
-  - 変更箇所（`main.py` のどこ）
-  - 期待効果（上げる指標）
-  - 比較条件（seed・相手・2P/4P）
-  - 見切り条件（失敗時に止める条件）
-
-### 5-2. ローカル比較の必須条件
-
-- `py_compile` が通ること
-- 2P: Producer, Kuni, Carbon, oldv2
-- 4P: 必要なら同じ条件で比較
-- `local_eval` の json を保存
-- 提出候補のみ snapshot とログを追加
-
-### 5-3. 提案採用基準
-
-- `Producer` 相手で悪化しない
-- `4P top2` が落ちない
-- `h19-like` 相手で崩れない
-- 3条件が同時成立した場合のみ提案ログへ反映
-
----
-
-## 6) 提出手順
-
-提出は自動ガードを通した候補だけに限定します。
+### 5-3. 提出準備（この状態でのみ）
 
 ```bash
 python3 scripts/cautious_submit_orbit.py highfast85
 python3 scripts/post_submit_audit_orbit.py
 ```
 
-- いずれか条件不一致なら提出しない
-- 提出後は `LOG.md` / `SUBMISSION_LOG.md` を即時更新
+---
+
+## 6) ログ運用とコメント規則
+
+### SUBMISSION_LOG 追記ルール（最低）
+
+- いつ提出したか
+- 何を変えたか
+- どの seed・相手で確認したか
+- 収束判定結果（spread・pending・latest2）
+
+### 提出コメントテンプレ
+
+```text
+<name> Producer-gate | <2P条件> | <seed帯と 4P条件> | <日付>
+```
+
+例:
+`highfast85 | 2P best_fast>=85 | 2P iso127-138 / 4P 127-128 | 2026-06-16`
 
 ---
 
-## 7) tar.gz の作成
-
-必要最小構成がシンプルなほど、提出再現が早くなります。
+## 7) tar.gz 作成（再現用）
 
 ```bash
 cd candidate_builds/h19_highfast_producer_gate_20260616/highfast85
@@ -235,28 +202,14 @@ tar -czf ../../../submissions/highfast85_repro_pack_20260617.tar.gz main.py orbi
 tar -tf ../../../submissions/highfast85_repro_pack_20260617.tar.gz
 ```
 
-再現最低要素:
-- `main.py`
-- `orbit_lite/`
-
 ---
 
-## 8) 提出コメントの書式（再現検証キー）
+## 8) 補足: どこを先に読むか（短縮版）
 
-同じ形式で残すと、提出物の再検索と採択理由の追跡が速くなります。
+この順で見れば5分で判断できます。
 
-```text
-<name> | <2P方針> | <2P/4P条件> | <seed帯・評価> | <日付>
-```
+1. 本節 1（最重要状態）
+2. 本節 2（再現フロー）
+3. 本節 6（ログ運用）
+4. `SUBMISSION_LOG.md`（全履歴確認）
 
-例:
-`highfast85 Producer-gate | best_fast>=85時 Producer切替 | 4P unchanged | 2P 127-138, 4P 127-128 | 2026-06-17`
-
----
-
-## 9) 運用で読むログ（最短）
-
-- `LOG.md`: 現在採用版と最新状態
-- `SUBMISSION_LOG.md`: 全提出の意思決定
-- `logs/snapshot_YYYYMMDD_HHMMSS/status.md`: live 収束・pending・順位
-- `logs/local_eval_*.json`: 2P/4P 比較結果

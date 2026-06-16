@@ -389,6 +389,21 @@ All dates use the local workspace context unless the row explicitly says Kaggle 
   - `prod3early80`: h19 `2-6`, Producer `5-3`, oldv2 `2-6`.
 - Decision: do not submit and do not deepen. The Producer-specific gain exists, but the behavior detector still false-positives on h19-like opponents and does not help oldv2. This confirms that simple predicted-launch match counts are not a reliable enough opponent model for switching a high-impact planner change. Future opponent modeling should use lower-impact local score shaping or require negative evidence that separates h19-like behavior, not only positive Producer matches.
 
+### 2026-06-16 16:41-17:45 JST (soft avoid-only Producer target modifier, no submit)
+
+- Built three lower-impact softmod variants under `candidate_builds/h19_softavoid_light_20260616/`:
+  - `attack0_avoid12`: no attack bonus, only `-1.2` penalty for draining planets predicted to be Producer targets.
+  - `attack0_avoid18`: no attack bonus, `-1.8` drain penalty.
+  - `strict4_attack0_avoid18`: same as `attack0_avoid18`, but Producer-like detection requires 4 predicted launch matches.
+- Syntax:
+  - `py_compile` passed for all three variants.
+- Stage1 eval:
+  - `logs/local_eval_20260616/softavoid_light_stage1_seed127_130.json`
+  - `avoid12`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
+  - `avoid18`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
+  - `strict4avoid18`: h19 `2-2-4`, Producer `4-4`, oldv2 `0-8`.
+- Decision: do not submit. Removing the attack bonus makes the modifier safer versus h19, but it still preserves the oldv2 collapse and adds runtime cost while giving no Producer edge over h19. This softmod family is useful only as a h19/self-like stabilizer, not as a gold-push candidate.
+
 ### 2026-06-14 13:58 (selection review)
 
 - Local comparison targets: `submissions/candidate_work_oppclone_20260614` (opponent-modeling variant) vs `/tmp/orbit_more_extracts/slawek_producer_v2` (ProducerV2 baseline).

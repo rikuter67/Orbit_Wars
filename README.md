@@ -194,9 +194,12 @@ kaggle competitions submit orbit-wars -f submissions/highfast85_producer_gate_20
 
 ---
 
-## 5) 採用版の再現（highfast85）
+## 5) 現状最強版の再現（highfast85）
 
-以下の投稿コメントと一致する版を再現します。
+この節の目的は、いま採用している **highfast85 現状最強版** を、
+他の人が同じ条件で同じ挙動として再現できるようにすることです。
+
+再現すべき版:
 
 ```text
 highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138 h19 14-6-4 Producer 12-10-2 oldv2 14-10 Kuni6-2 Carbon6-2 | 4P unchanged | 20260616
@@ -209,7 +212,12 @@ highfast85 Producer-gate | 2P switch to Producer when best_fast>=85 | iso127-138
   - `candidate_builds/h19_highfast_producer_gate_20260616/highfast85/orbit_lite/`
   - `submissions/highfast85_producer_gate_20260616.tar.gz`
 
-### 5-1. ローカル再現手順（最短）
+### 5-1. 再現手順（同じ結果を出すための順番）
+
+1. 同じ Python 環境を作る。
+2. いま採用している `main.py` が壊れていないか確認。
+3. 2P/FFA の比較を、採用時と同じ seed 範囲で回して傾向を確認。
+4. 最後に snapshot を取って、提出時ログと比較できる状態にする。
 
 ```bash
 cd /mnt/c/Users/rikuter/kaggle/Orbit_Wars_git
